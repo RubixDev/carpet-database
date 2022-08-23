@@ -12,6 +12,7 @@ for repo in repo_info:
             branch_data = json.load(branch_file)
         for new_rule in branch_data:
             new_rule['repo'] = repo['repo']
+            new_rule['config_files'] = repo['config_files']
             new_rule['branches'] = [branch]
 
             did_modify = False
@@ -25,7 +26,8 @@ for repo in repo_info:
                         and rule['options'] == new_rule['options'] \
                         and rule['extras'] == new_rule['extras'] \
                         and rule['validators'] == new_rule['validators'] \
-                        and rule['repo'] == new_rule['repo']:
+                        and rule['repo'] == new_rule['repo'] \
+                        and rule['config_files'] == new_rule['config_files']:
                     rule['branches'].append(branch)
                     did_modify = True
             if not did_modify:
