@@ -1,0 +1,104 @@
+[
+  {
+    "host": "github.com",
+    "repo": "gnembon/fabric-carpet",
+    "printer_version": 1,
+    "java_version": 8,
+    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "settings_manager": "carpet.CarpetServer.settingsManager",
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.14.4",
+      "1.15.2",
+      "1.16.5"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "gnembon/fabric-carpet",
+    "printer_version": 1,
+    "java_version": 16,
+    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "settings_manager": "carpet.CarpetServer.settingsManager",
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.17.1"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "gnembon/fabric-carpet",
+    "printer_version": 1,
+    "java_version": 18,
+    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "settings_manager": "carpet.CarpetServer.settingsManager",
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.18.2",
+      "master"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "jsorrell/CarpetSkyAdditions",
+    "printer_version": 1,
+    "java_version": 18,
+    "entrypoint": "com.jsorrell.carpetskyadditions.SkyAdditionsExtension",
+    "settings_manager": "com.jsorrell.carpetskyadditions.SkyAdditionsExtension.settingsManager",
+    "config_files": [
+      "carpetskyadditions.conf"
+    ],
+    "branches": [
+      "1.19"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "whoImT/carpet-addons",
+    "printer_version": 1,
+    "java_version": 8,
+    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "settings_manager": "carpet.CarpetServer.settingsManager",
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.15.2",
+      "1.16.x"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "whoImT/carpet-addons",
+    "printer_version": 1,
+    "java_version": 16,
+    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "settings_manager": "carpet.CarpetServer.settingsManager",
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.17"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "whoImT/carpet-addons",
+    "printer_version": 1,
+    "java_version": 18,
+    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "settings_manager": "carpet.CarpetServer.settingsManager",
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.18.x"
+    ]
+  }
+]
