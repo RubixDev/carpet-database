@@ -1,10 +1,20 @@
 [
   {
     "host": "github.com",
+    "repo": "RubixDev/Rug",
+    "printer_version": 2,
+    "java_version": 18,
+    "entrypoint": "de.rubixdev.rug.RugServer",
+    "settings_manager": "carpet.CarpetServer.settingsManager",
+    "config_files": ["carpet.conf"],
+    "branches": ["1.19"]
+  },
+  {
+    "host": "github.com",
     "repo": "gnembon/fabric-carpet",
     "printer_version": 1,
     "java_version": 8,
-    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "entrypoint": null,
     "settings_manager": "carpet.CarpetServer.settingsManager",
     "config_files": [
       "carpet.conf"
@@ -20,7 +30,7 @@
     "repo": "gnembon/fabric-carpet",
     "printer_version": 1,
     "java_version": 16,
-    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "entrypoint": null,
     "settings_manager": "carpet.CarpetServer.settingsManager",
     "config_files": [
       "carpet.conf"
@@ -34,7 +44,7 @@
     "repo": "gnembon/fabric-carpet",
     "printer_version": 1,
     "java_version": 18,
-    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "entrypoint": null,
     "settings_manager": "carpet.CarpetServer.settingsManager",
     "config_files": [
       "carpet.conf"
@@ -63,7 +73,7 @@
     "repo": "whoImT/carpet-addons",
     "printer_version": 1,
     "java_version": 8,
-    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "entrypoint": null,
     "settings_manager": "carpet.CarpetServer.settingsManager",
     "config_files": [
       "carpet.conf"
@@ -78,7 +88,7 @@
     "repo": "whoImT/carpet-addons",
     "printer_version": 1,
     "java_version": 16,
-    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "entrypoint": null,
     "settings_manager": "carpet.CarpetServer.settingsManager",
     "config_files": [
       "carpet.conf"
@@ -92,7 +102,7 @@
     "repo": "whoImT/carpet-addons",
     "printer_version": 1,
     "java_version": 18,
-    "entrypoint": "carpet.CarpetServer::onGameStarted",
+    "entrypoint": null,
     "settings_manager": "carpet.CarpetServer.settingsManager",
     "config_files": [
       "carpet.conf"

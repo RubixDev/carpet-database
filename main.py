@@ -42,7 +42,7 @@ def get_repo_data(info: dict[str, any]) -> dict[str, any]:
     repo_name: str = info['repo'].split('/')[1]
     printer_version: int = info['printer_version']
     java_version: int = info['java_version']
-    entrypoint: str = info['entrypoint']
+    entrypoint: str = info['entrypoint'] if 'entrypoint' in info else None
     settings_manager: str = info['settings_manager']
     branches: list[str] = info['branches']
 
@@ -87,7 +87,8 @@ def get_branch_data(
         with open('../../printers/V1Printer.java', 'r') as raw_printer_file:
             raw_printer = raw_printer_file.read()
     elif printer_version == 2:
-        print('TODO')  # TODO: v2 Printer
+        with open('../../printers/V2Printer.java', 'r') as raw_printer_file:
+            raw_printer = raw_printer_file.read()
     else:
         print(
             f'Unsupported printer version `{printer_version}`',
@@ -101,7 +102,9 @@ def get_branch_data(
     # Set entrypoints
     with open('src/main/resources/fabric.mod.json', 'r') as fabric_file:
         fabric_conf = json.load(fabric_file)
-    fabric_conf['entrypoints']['main'] = [entrypoint, 'Printer::print']
+    entrypoints = [entrypoint] if entrypoint is not None else []
+    entrypoints += ['carpet.CarpetServer::onGameStarted', 'Printer::print']
+    fabric_conf['entrypoints']['main'] = entrypoints
     with open('src/main/resources/fabric.mod.json', 'w') as fabric_file:
         json.dump(fabric_conf, fabric_file)
 
