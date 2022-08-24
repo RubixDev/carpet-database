@@ -85,6 +85,16 @@ def get_branch_data(
     # Pull
     subprocess.Popen(['git', 'pull', '--no-rebase']).wait()
 
+    # Stop if commit is still same
+    if os.path.isfile(f'../../data/{repo_name}-{branch}.json'):
+        with open(f'../../data/{repo_name}-{branch}.json', 'r') as data_file:
+            prev_data = json.load(data_file)
+        current_commit = subprocess.Popen(['git', 'rev-parse', 'HEAD'],
+                                          stdout=subprocess.PIPE, text=True) \
+            .stdout.read().replace('\n', '')
+        if 'commit' in prev_data and prev_data['commit'] == current_commit:
+            return
+
     # Write Printer.java
     if printer_version == 1:
         with open('../../printers/V1Printer.java', 'r') as raw_printer_file:
@@ -160,15 +170,25 @@ def get_branch_data(
 
     # Run
     os.chmod('gradlew', os.stat('gradlew').st_mode | 0o111)
-    data = subprocess.Popen(['./gradlew', 'runServer'],
-                            stderr=subprocess.PIPE, text=True).stderr.read()
-
-    if '|||DATA_START|||' not in data:
-        print(data)
+    rules = subprocess.Popen(['./gradlew', 'runServer'],
+                             stderr=subprocess.PIPE, text=True).stderr.read()
+    if '|||DATA_START|||' not in rules:
+        print(rules)
         return
+    rules = rules.split('|||DATA_START|||')[1]
+
+    # Get current commit hash
+    commit = subprocess.Popen(['git', 'rev-parse', 'HEAD'],
+                              stdout=subprocess.PIPE, text=True) \
+        .stdout.read().replace('\n', '')
+
     # Save json to file
+    data = {
+        'commit': commit,
+        'rules': json.loads(rules),
+    }
     with open(f'../../data/{repo_name}-{branch}.json', 'w') as data_file:
-        data_file.write(data.split('|||DATA_START|||')[1])
+        json.dump(data, data_file)
 
 
 if __name__ == '__main__':

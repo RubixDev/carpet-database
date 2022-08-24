@@ -10,7 +10,7 @@ for repo in repo_info:
     for branch in repo['branches']:
         with open(f'data/{repo_name}-{branch}.json', 'r') as branch_file:
             branch_data = json.load(branch_file)
-        for new_rule in branch_data:
+        for new_rule in branch_data['rules']:
             new_rule['host'] = repo['host']
             new_rule['repo'] = repo['repo']
             new_rule['config_files'] = repo['config_files']
