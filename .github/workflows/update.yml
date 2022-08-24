@@ -37,4 +37,4 @@ jobs:
           add: data
           author_name: github-actions[bot]
           default_author: github_actions
-          message: "Update database '${{ steps.capture-data.outputs.date }}'"
+          message: "Update database '${{ steps.capture-date.outputs.date }}'"
