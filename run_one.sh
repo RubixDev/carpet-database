@@ -21,7 +21,7 @@ COPY --from=python:3.10 /etc /etc
 EOF
 
 # run image
-docker run --rm -it \
+docker run --rm \
     -v "$PWD/data:/data" \
     -v "$PWD/cache/repos:/repos" \
     -v "$PWD/cache/gradle:/root/.gradle" \
