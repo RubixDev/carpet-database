@@ -53,5 +53,18 @@ for rule in data:
     if rule['validators'] == []:
         del rule['validators']
 
+# Print rule count stats
+rule_counts = {}
+total_count = 0
+for repo in repo_info:
+    count = len(set(
+        rule['name'] for rule in data if rule['repo'] == repo['repo']))
+    rule_counts[repo['repo']] = count
+    total_count += count
+
+print(f'**Rules parsed**: {total_count}\n')
+for repo, count in rule_counts.items():
+    print(f'**{repo}**: {count}')
+
 with open('data/combined.json', 'w') as data_file:
     json.dump(data, data_file)
