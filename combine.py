@@ -11,6 +11,7 @@ for repo in repo_info:
         with open(f'data/{repo_name}-{branch}.json', 'r') as branch_file:
             branch_data = json.load(branch_file)
         for new_rule in branch_data:
+            new_rule['host'] = repo['host']
             new_rule['repo'] = repo['repo']
             new_rule['config_files'] = repo['config_files']
             new_rule['branches'] = [branch]
@@ -26,6 +27,7 @@ for repo in repo_info:
                         and rule['options'] == new_rule['options'] \
                         and rule['extras'] == new_rule['extras'] \
                         and rule['validators'] == new_rule['validators'] \
+                        and rule['host'] == new_rule['host'] \
                         and rule['repo'] == new_rule['repo'] \
                         and rule['config_files'] == new_rule['config_files']:
                     rule['branches'].append(branch)
