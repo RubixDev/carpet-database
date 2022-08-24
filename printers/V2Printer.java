@@ -3,6 +3,7 @@ import carpet.api.settings.Rule;
 import carpet.api.settings.RuleHelper;
 import carpet.api.settings.Validator;
 import carpet.settings.ParsedRule;
+import carpet.utils.Translations;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -36,11 +37,13 @@ public class Printer {
             obj.add("categories", gson.toJsonTree(rule.categories().stream().map(String::toUpperCase).toList()));
             obj.add("options", gson.toJsonTree(rule.suggestions()));
             obj.add("extras", gson.toJsonTree(rule.extraInfo().stream().map(Text::getString).toList()));
+            List<String> validators = new ArrayList<>();
             if (rule instanceof ParsedRule<?> parsedRule) {
-                obj.add("validators", gson.toJsonTree(parsedRule.realValidators.stream().map(Validator::description).filter(Objects::nonNull).toList()));
-            } else {
-                obj.add("validators", new JsonArray());
+                validators.addAll(parsedRule.realValidators.stream().map(Validator::description).filter(Objects::nonNull).toList());
             }
+            String additional = Translations.trOrNull(String.format("%s.rule.%s.additional", rule.settingsManager().identifier(), rule.name()));
+            if (additional != null) validators.add(additional);
+            obj.add("validators", gson.toJsonTree(validators));
             rules.add(obj);
         }
         System.err.print("");

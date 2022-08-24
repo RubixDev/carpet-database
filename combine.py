@@ -1,5 +1,10 @@
 import json
 
+
+def is_sublist(list1: list, list2: list) -> bool:
+    return list1 in [list2[i:len(list1) + i] for i in range(len(list2))]
+
+
 with open('data/repos.json', 'r') as repos_file:
     repo_info = json.load(repos_file)
 
@@ -26,10 +31,17 @@ for repo in repo_info:
                         and rule['categories'] == new_rule['categories'] \
                         and rule['options'] == new_rule['options'] \
                         and rule['extras'] == new_rule['extras'] \
-                        and rule['validators'] == new_rule['validators'] \
+                        and (
+                            is_sublist(rule['validators'],
+                                       new_rule['validators'])
+                            or is_sublist(new_rule['validators'],
+                                          rule['validators'])
+                        ) \
                         and rule['host'] == new_rule['host'] \
                         and rule['repo'] == new_rule['repo'] \
                         and rule['config_files'] == new_rule['config_files']:
+                    if len(new_rule['validators']) > len(rule['validators']):
+                        rule['validators'] = new_rule['validators']
                     rule['branches'].append(branch)
                     did_modify = True
             if not did_modify:
