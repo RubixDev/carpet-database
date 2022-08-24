@@ -22,6 +22,12 @@ jobs:
           key: "${{ runner.os }}-${{ hashFiles('./data/*.json') }}"
           restore-keys: ${{ runner.os }}-
 
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Update repos.json
+        run: python update_repos_json.py
+
       - name: Run with Java 18
         run: ./run_one.sh 18
 
