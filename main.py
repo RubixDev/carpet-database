@@ -75,6 +75,8 @@ def get_branch_data(
     cwd to be in the cloned repo.
     """
 
+    print(f'Getting data for {repo_name} on branch {branch}')
+
     # Undo any git changes
     subprocess.Popen(['git', 'checkout', '.']).wait()
     subprocess.Popen(['git', 'clean', '-fd']).wait()

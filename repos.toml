@@ -1,0 +1,193 @@
+##### fabric-carpet #####
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/fabric-carpet'
+printer_version = 1
+java_version = 8
+settings_files = ['carpet.CarpetSettings']
+config_files = ['carpet.conf']
+branches = [
+    '1.14.4',
+    '1.15.2',
+    '1.16.5',
+]
+
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/fabric-carpet'
+printer_version = 1
+java_version = 16
+settings_files = ['carpet.CarpetSettings']
+config_files = ['carpet.conf']
+branches = ['1.17.1']
+
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/fabric-carpet'
+printer_version = 1
+java_version = 18
+settings_files = ['carpet.CarpetSettings']
+config_files = ['carpet.conf']
+branches = [
+    '1.18.2',
+    'master',
+]
+
+##### carpet-extra #####
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/carpet-extra'
+printer_version = 1
+java_version = 8
+settings_files = ['carpetextra.CarpetExtraSettings']
+config_files = ['carpet.conf']
+branches = ['1.15.2']
+
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/carpet-extra'
+printer_version = 1
+java_version = 8
+entrypoint = 'carpetextra.CarpetExtraServer'
+settings_files = ['carpetextra.CarpetExtraSettings']
+config_files = ['carpet.conf']
+branches = ['1.16.5']
+
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/carpet-extra'
+printer_version = 1
+java_version = 16
+entrypoint = 'carpetextra.CarpetExtraServer'
+settings_files = ['carpetextra.CarpetExtraSettings']
+config_files = ['carpet.conf']
+branches = ['1.17.1']
+
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/carpet-extra'
+printer_version = 1
+java_version = 18
+entrypoint = 'carpetextra.CarpetExtraServer'
+settings_files = ['carpetextra.CarpetExtraSettings']
+config_files = ['carpet.conf']
+branches = ['1.18.2']
+
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/carpet-extra'
+printer_version = 2
+java_version = 18
+entrypoint = 'carpetextra.CarpetExtraServer'
+settings_files = ['carpetextra.CarpetExtraSettings']
+config_files = ['carpet.conf']
+branches = ['master']
+
+##### Rug #####
+[[repos]]
+host = 'github.com'
+repo = 'RubixDev/Rug'
+printer_version = 1
+java_version = 8
+entrypoint = 'de.rubixdev.rug.RugServer'
+settings_files = ['de.rubixdev.rug.RugSettings']
+config_files = ['carpet.conf']
+branches = ['1.16']
+
+[[repos]]
+host = 'github.com'
+repo = 'RubixDev/Rug'
+printer_version = 1
+java_version = 16
+entrypoint = 'de.rubixdev.rug.RugServer'
+settings_files = ['de.rubixdev.rug.RugSettings']
+config_files = ['carpet.conf']
+branches = ['1.17']
+
+[[repos]]
+host = 'github.com'
+repo = 'RubixDev/Rug'
+printer_version = 1
+java_version = 18
+entrypoint = 'de.rubixdev.rug.RugServer'
+settings_files = ['de.rubixdev.rug.RugSettings']
+config_files = ['carpet.conf']
+branches = ['1.18']
+
+[[repos]]
+host = 'github.com'
+repo = 'RubixDev/Rug'
+printer_version = 2
+java_version = 18
+entrypoint = 'de.rubixdev.rug.RugServer'
+settings_files = ['de.rubixdev.rug.RugSettings']
+config_files = ['carpet.conf']
+branches = ['1.19']
+
+##### CarpetSkyAdditions #####
+[[repos]]
+host = 'github.com'
+repo = 'jsorrell/CarpetSkyAdditions'
+printer_version = 1
+java_version = 8
+entrypoint = 'skyblock.SkyBlockExtension'
+settings_manager = 'skyblock.SkyBlockExtension.mySettingManager'
+settings_files = ['skyblock.SkyBlockSettings']
+config_files = ['skyblock.conf']
+branches = ['1.16.5']
+
+[[repos]]
+host = 'github.com'
+repo = 'jsorrell/CarpetSkyAdditions'
+printer_version = 1
+java_version = 18
+entrypoint = 'com.jsorrell.skyblock.SkyBlockExtension'
+settings_manager = 'com.jsorrell.skyblock.SkyBlockExtension.settingsManager'
+settings_files = ['com.jsorrell.skyblock.SkyBlockSettings']
+config_files = ['skyblock.conf']
+branches = [
+    '1.17',
+    '1.18',
+]
+
+[[repos]]
+host = 'github.com'
+repo = 'jsorrell/CarpetSkyAdditions'
+printer_version = 1
+java_version = 18
+entrypoint = 'com.jsorrell.carpetskyadditions.SkyAdditionsExtension'
+settings_manager = 'com.jsorrell.carpetskyadditions.SkyAdditionsExtension.settingsManager'
+settings_files = ['com.jsorrell.carpetskyadditions.settings.SkyAdditionsSettings']
+config_files = ['carpetskyadditions.conf']
+branches = ['1.19']
+
+##### carpet-addons #####
+[[repos]]
+host = 'github.com'
+repo = 'whoImT/carpet-addons'
+printer_version = 1
+java_version = 8
+settings_files = ['carpetaddons.CarpetAddonsSettings']
+config_files = ['carpet.conf']
+branches = [
+    '1.15.2',
+    '1.16.x',
+]
+
+[[repos]]
+host = 'github.com'
+repo = 'whoImT/carpet-addons'
+printer_version = 1
+java_version = 16
+settings_files = ['carpetaddons.CarpetAddonsSettings']
+config_files = ['carpet.conf']
+branches = ['1.17']
+
+[[repos]]
+host = 'github.com'
+repo = 'whoImT/carpet-addons'
+printer_version = 1
+java_version = 18
+settings_files = ['carpetaddons.CarpetAddonsSettings']
+config_files = ['carpet.conf']
+branches = ['1.18.x']
