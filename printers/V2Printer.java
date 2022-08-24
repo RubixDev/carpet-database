@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.text.Text;
+import org.apache.commons.lang3.ClassUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -31,7 +32,8 @@ public class Printer {
             JsonObject obj = new JsonObject();
             obj.addProperty("name", rule.name());
             obj.addProperty("description", RuleHelper.translatedDescription(rule));
-            obj.addProperty("type", rule.type().getSimpleName());
+            Class<?> primitive = ClassUtils.wrapperToPrimitive(rule.type());
+            obj.addProperty("type", (primitive != null ? primitive : rule.type()).getSimpleName());
             obj.addProperty("value", RuleHelper.toRuleString(rule.defaultValue()));
             obj.addProperty("strict", (rule instanceof ParsedRule<?> pr && pr.isStrict));
             obj.add("categories", gson.toJsonTree(rule.categories().stream().map(String::toUpperCase).toList()));
