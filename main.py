@@ -122,7 +122,9 @@ def get_branch_data(
         fabric_conf = json.load(fabric_file)
     entrypoints = [entrypoint] if entrypoint is not None else []
     entrypoints += ['carpet.CarpetServer::onGameStarted', 'Printer::print']
-    fabric_conf['entrypoints']['main'] = entrypoints
+    fabric_conf['entrypoints'] = {
+        'main': entrypoints
+    }
     with open('src/main/resources/fabric.mod.json', 'w') as fabric_file:
         json.dump(fabric_conf, fabric_file)
 
@@ -133,7 +135,7 @@ def get_branch_data(
         with open(filename, 'r') as init_file:
             init_code = init_file.read()
         init_code = re.compile(
-            r'private\s*(static\s*SettingsManager\s*.+;)') \
+            r'private\s*(static\s*(final\s*)?SettingsManager\s*.+;)') \
             .sub(r'public \1', init_code)
         with open(filename, 'w') as init_file:
             init_file.write(init_code)
