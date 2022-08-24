@@ -35,5 +35,11 @@ for repo in repo_info:
             if not did_modify:
                 data.append(new_rule)
 
+for rule in data:
+    if rule['extras'] == []:
+        del rule['extras']
+    if rule['validators'] == []:
+        del rule['validators']
+
 with open('data/combined.json', 'w') as data_file:
     json.dump(data, data_file)
