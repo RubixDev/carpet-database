@@ -57,6 +57,8 @@ for rule in data:
 rule_counts = {}
 total_count = 0
 for repo in repo_info:
+    if repo['repo'] in rule_counts:
+        continue
     count = len(set(
         rule['name'] for rule in data if rule['repo'] == repo['repo']))
     rule_counts[repo['repo']] = count
