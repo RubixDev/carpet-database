@@ -2,6 +2,57 @@
   {
     "host": "github.com",
     "repo": "RubixDev/Rug",
+    "printer_version": 1,
+    "java_version": 8,
+    "entrypoint": "de.rubixdev.rug.RugServer",
+    "settings_manager": null,
+    "settings_files": [
+      "de.rubixdev.rug.RugSettings"
+    ],
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.16"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "RubixDev/Rug",
+    "printer_version": 1,
+    "java_version": 16,
+    "entrypoint": "de.rubixdev.rug.RugServer",
+    "settings_manager": null,
+    "settings_files": [
+      "de.rubixdev.rug.RugSettings"
+    ],
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.17"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "RubixDev/Rug",
+    "printer_version": 1,
+    "java_version": 18,
+    "entrypoint": "de.rubixdev.rug.RugServer",
+    "settings_manager": null,
+    "settings_files": [
+      "de.rubixdev.rug.RugSettings"
+    ],
+    "config_files": [
+      "carpet.conf"
+    ],
+    "branches": [
+      "1.18"
+    ]
+  },
+  {
+    "host": "github.com",
+    "repo": "RubixDev/Rug",
     "printer_version": 2,
     "java_version": 18,
     "entrypoint": "de.rubixdev.rug.RugServer",
