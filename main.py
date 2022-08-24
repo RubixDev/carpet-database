@@ -43,7 +43,9 @@ def get_repo_data(info: dict[str, any]) -> dict[str, any]:
     printer_version: int = info['printer_version']
     java_version: int = info['java_version']
     entrypoint: str = info['entrypoint'] if 'entrypoint' in info else None
-    settings_manager: str = info['settings_manager']
+    settings_manager: str = info['settings_manager'] \
+        or 'carpet.CarpetServer.settingsManager'
+    settings_files: list[str] = info['settings_files']
     branches: list[str] = info['branches']
 
     if os.path.isdir(repo_name):
@@ -55,7 +57,7 @@ def get_repo_data(info: dict[str, any]) -> dict[str, any]:
 
     for branch in branches:
         get_branch_data(repo_name, printer_version, java_version, entrypoint,
-                        settings_manager, branch)
+                        settings_manager, settings_files, branch)
 
     os.chdir('..')
 
@@ -66,6 +68,7 @@ def get_branch_data(
         java_version: int,
         entrypoint: str,
         settings_manager: str,
+        settings_files: list[str],
         branch: str):
     """
     Generates the data file for one branch of a repo, expects
@@ -95,7 +98,10 @@ def get_branch_data(
             file=sys.stderr)
         return
 
-    printer = raw_printer.replace('SETTINGS_MANAGER', settings_manager)
+    printer = raw_printer.replace('SETTINGS_MANAGER', settings_manager) \
+        .replace('SETTINGS_FILES', ', '.join(
+            [f + '.class' for f in settings_files]))
+
     with open('src/main/java/Printer.java', 'w') as printer_file:
         printer_file.write(printer)
 
@@ -115,7 +121,7 @@ def get_branch_data(
         with open(filename, 'r') as init_file:
             init_code = init_file.read()
         init_code = re.compile(
-            r'private (static SettingsManager \w+;)') \
+            r'private\s*(static\s*SettingsManager\s*.+;)') \
             .sub(r'public \1', init_code)
         with open(filename, 'w') as init_file:
             init_file.write(init_code)
@@ -153,6 +159,7 @@ def get_branch_data(
         eula_file.write('eula=true')
 
     # Run
+    os.chmod('gradlew', os.stat('gradlew').st_mode | 0o111)
     data = subprocess.Popen(['./gradlew', 'runServer'],
                             stderr=subprocess.PIPE, text=True).stderr.read()
 

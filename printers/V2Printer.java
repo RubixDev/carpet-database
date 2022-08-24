@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Printer {
     public static void print() {
         List<String> ruleNames = new ArrayList<>();
-        for (Class<?> clazz : List.of(de.rubixdev.rug.RugSettings.class)) {
+        for (Class<?> clazz : new Class<?>[] { SETTINGS_FILES }) {
             for (Field field : clazz.getDeclaredFields()) {
                 if (field.getAnnotation(Rule.class) == null) continue;
                 ruleNames.add(field.getName());
@@ -25,7 +25,7 @@ public class Printer {
 
         Gson gson = new Gson();
         JsonArray rules = new JsonArray();
-        for (CarpetRule<?> rule : carpet.CarpetServer.settingsManager.getCarpetRules()) {
+        for (CarpetRule<?> rule : SETTINGS_MANAGER.getCarpetRules()) {
             if (!ruleNames.contains(rule.name())) continue;
             JsonObject obj = new JsonObject();
             obj.addProperty("name", rule.name());
