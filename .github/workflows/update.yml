@@ -22,10 +22,6 @@ jobs:
           key: "${{ runner.os }}-${{ hashFiles('./data/*.json') }}"
           restore-keys: ${{ runner.os }}-
 
-      - name: Cache docker images
-        uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-
       - name: Run with Java 18
         run: ./run_one.sh 18
 
