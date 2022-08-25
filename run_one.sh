@@ -18,14 +18,18 @@ COPY --from=python:3.10 /usr/local /usr/local
 COPY --from=python:3.10 /usr/bin /usr/bin
 COPY --from=python:3.10 /usr/lib /usr/lib
 COPY --from=python:3.10 /etc /etc
+
+RUN useradd -s /bin/bash -u 1000 -m user
+RUN mkdir -p /app && chown -R user:user /app
+WORKDIR /app
 EOF
 
 # run image
-docker run --rm \
-    -v "$PWD/data:/data" \
-    -v "$PWD/cache/repos:/repos" \
-    -v "$PWD/cache/gradle:/root/.gradle" \
-    -v "$PWD/main.py:/run.py:ro" \
-    -v "$PWD/printers:/printers:ro" \
+docker run -it -u 1000 \
+    -v "$PWD/data:/app/data" \
+    -v "$PWD/cache/repos:/app/repos" \
+    -v "$PWD/cache/gradle:/home/user/.gradle" \
+    -v "$PWD/main.py:/app/run.py:ro" \
+    -v "$PWD/printers:/app/printers:ro" \
     "carpet-database-java-${java_version}" \
     python run.py "${java_version}"
