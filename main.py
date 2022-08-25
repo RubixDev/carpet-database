@@ -25,13 +25,17 @@ def main():
 
     os.makedirs('repos', exist_ok=True)
     os.chdir('repos')
+    failed = False
     for repo in repo_data:
         if repo['java_version'] != java_version:
             continue
-        get_repo_data(repo)
+        if not get_repo_data(repo):
+            failed = True
+    if failed:
+        exit(1)
 
 
-def get_repo_data(info: dict[str, any]) -> dict[str, any]:
+def get_repo_data(info: dict[str, any]) -> bool:
     """
     Iterates through all branches of a repo and generates the data
     file for each one
@@ -58,12 +62,15 @@ def get_repo_data(info: dict[str, any]) -> dict[str, any]:
             ['git', 'clone', f'https://{host}/{repo_user}/{repo_name}']).wait()
         os.chdir(repo_name)
 
+    failed = False
     for branch in branches:
-        get_branch_data(repo_name, printer_version, java_version, entrypoint,
-                        settings_manager, settings_files, branch,
-                        loom_override)
+        if not get_branch_data(repo_name, printer_version, java_version,
+                               entrypoint, settings_manager, settings_files,
+                               branch, loom_override):
+            failed = True
 
     os.chdir('..')
+    return not failed
 
 
 def get_branch_data(
@@ -74,7 +81,7 @@ def get_branch_data(
         settings_manager: str,
         settings_files: list[str],
         branch: str,
-        loom_override: str | None):
+        loom_override: str | None) -> bool:
     """
     Generates the data file for one branch of a repo, expects
     cwd to be in the cloned repo.
@@ -101,7 +108,7 @@ def get_branch_data(
                                           stdout=subprocess.PIPE, text=True) \
             .stdout.read().replace('\n', '')
         if 'commit' in prev_data and prev_data['commit'] == current_commit:
-            return
+            return True
 
     # Write Printer.java
     if printer_version == 1:
@@ -114,7 +121,7 @@ def get_branch_data(
         print(
             f'Unsupported printer version `{printer_version}`',
             file=sys.stderr)
-        return
+        return False
 
     printer = raw_printer.replace('SETTINGS_MANAGER', settings_manager) \
         .replace('SETTINGS_FILES', ', '.join(
@@ -193,7 +200,7 @@ repositories {
                              stderr=subprocess.PIPE, text=True).stderr.read()
     if '|||DATA_START|||' not in rules:
         print(rules)
-        return
+        return False
     rules = rules.split('|||DATA_START|||')[1]
 
     # Get current commit hash
@@ -208,6 +215,8 @@ repositories {
     }
     with open(f'../../data/{repo_name}-{branch}.json', 'w') as data_file:
         json.dump(data, data_file)
+
+    return True
 
 
 if __name__ == '__main__':
