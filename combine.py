@@ -2,7 +2,8 @@ import json
 
 
 def is_sublist(list1: list, list2: list) -> bool:
-    return list1 in [list2[i:len(list1) + i] for i in range(len(list2))]
+    return list1 in [list2[i:len(list1) + i] for i in range(len(list2))] \
+        or list1 == list2
 
 
 with open('data/repos.json', 'r') as repos_file:
