@@ -107,17 +107,17 @@ settings_files = ['carpet_autocraftingtable.AutoCraftingTableSettings']
 config_files = ['carpet.conf']
 branches = ['1.15.2', '1.16.4']
 
-# TODO: make this run
-#[[repos]]
-#host = 'github.com'
-#repo = 'gnembon/carpet-autoCraftingTable'
-#printer_version = 1
-#java_version = 16
-##entrypoint = ''
-##settings_manager = ''
-#settings_files = ['carpet_autocraftingtable.AutoCraftingTableSettings']
-#config_files = ['carpet.conf']
-#branches = ['master']
+[[repos]]
+host = 'github.com'
+repo = 'gnembon/carpet-autoCraftingTable'
+printer_version = 1
+java_version = 18
+#entrypoint = ''
+#settings_manager = ''
+settings_files = ['carpet_autocraftingtable.AutoCraftingTableSettings']
+config_files = ['carpet.conf']
+branches = ['master']
+loom_override = '0.10-SNAPSHOT'
 
 ##### carpet-fixes #####
 [[repos]]

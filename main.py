@@ -47,6 +47,9 @@ def get_repo_data(info: dict[str, any]) -> dict[str, any]:
         or 'carpet.CarpetServer.settingsManager'
     settings_files: list[str] = info['settings_files']
     branches: list[str] = info['branches']
+    loom_override: str | None = None
+    if 'loom_override' in info:
+        loom_override = info['loom_override']
 
     if os.path.isdir(repo_name):
         os.chdir(repo_name)
@@ -57,7 +60,8 @@ def get_repo_data(info: dict[str, any]) -> dict[str, any]:
 
     for branch in branches:
         get_branch_data(repo_name, printer_version, java_version, entrypoint,
-                        settings_manager, settings_files, branch)
+                        settings_manager, settings_files, branch,
+                        loom_override)
 
     os.chdir('..')
 
@@ -69,13 +73,14 @@ def get_branch_data(
         entrypoint: str,
         settings_manager: str,
         settings_files: list[str],
-        branch: str):
+        branch: str,
+        loom_override: str | None):
     """
     Generates the data file for one branch of a repo, expects
     cwd to be in the cloned repo.
     """
 
-    print(f' ==> Getting data for {repo_name} on branch {branch}')
+    print(f'\n ==> Getting data for {repo_name} on branch {branch}')
     sys.stdout.flush()
 
     # Undo any git changes
@@ -141,7 +146,7 @@ def get_branch_data(
         with open(filename, 'w') as init_file:
             init_file.write(init_code)
 
-    # Set loom version
+    # Get loom and gradle versions
     match java_version:
         case 8:
             loom_version = '0.7-SNAPSHOT'
@@ -152,6 +157,10 @@ def get_branch_data(
         case 18:
             loom_version = '0.12-SNAPSHOT'
             gradle_version = '7.4'
+    if loom_override is not None:
+        loom_version = loom_override
+
+    # Set loom version
     with open('build.gradle', 'r') as gradle_file:
         gradle_props = gradle_file.read()
     gradle_props = re.compile(
