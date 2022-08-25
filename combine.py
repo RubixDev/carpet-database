@@ -66,7 +66,8 @@ for repo in repo_info:
     total_count += count
 
 print(f'**Rules parsed**: {total_count}\n')
-for repo, count in rule_counts.items():
+for repo, count in sorted(
+        rule_counts.items(), key=lambda c: c[1], reverse=True):
     print(f'**{repo}**: {count}')
 
 with open('data/combined.json', 'w') as data_file:
