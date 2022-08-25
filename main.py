@@ -54,6 +54,9 @@ def get_repo_data(info: dict[str, any]) -> bool:
     loom_override: str | None = None
     if 'loom_override' in info:
         loom_override = info['loom_override']
+    mappings_override: str | None = None
+    if 'mappings_override' in info:
+        mappings_override = info['mappings_override']
 
     if os.path.isdir(repo_name):
         os.chdir(repo_name)
@@ -66,7 +69,7 @@ def get_repo_data(info: dict[str, any]) -> bool:
     for branch in branches:
         if not get_branch_data(repo_name, printer_version, java_version,
                                entrypoint, settings_manager, settings_files,
-                               branch, loom_override):
+                               branch, loom_override, mappings_override):
             failed = True
 
     os.chdir('..')
@@ -81,7 +84,8 @@ def get_branch_data(
         settings_manager: str,
         settings_files: list[str],
         branch: str,
-        loom_override: str | None) -> bool:
+        loom_override: str | None,
+        mappings_override: str | None) -> bool:
     """
     Generates the data file for one branch of a repo, expects
     cwd to be in the cloned repo.
@@ -167,19 +171,30 @@ def get_branch_data(
     if loom_override is not None:
         loom_version = loom_override
 
-    # Set loom version and carpet maven repo and remove publishing
+    # Modify build.gradle
+    # -> Read file
     with open('build.gradle', 'r') as gradle_file:
         gradle_props = gradle_file.read()
+    # -> Set loom version
     gradle_props = re.compile(
         r"""(id\s*(['"])fabric-loom\2\s*version\s*(['"]))[^\3]+?\3""") \
         .sub(r'\g<1>' + loom_version + r'\3', gradle_props)
+    # -> Add carpet maven repo
     gradle_props += """
 repositories {
     maven { url = 'https://masa.dy.fi/maven' }
 }
     """
+    # -> Remove publishing
     gradle_props = re.compile(
         r'publishing\s*\{[\s\S]*?\n\}').sub('', gradle_props)
+    # -> Override mappings
+    if mappings_override is not None:
+        gradle_props = re.compile(
+            r"""([ \t]*)mappings\s*((['"]).*\3|[^'"]*\{[\s\S]*?\1\})""") \
+            .sub(r'\1mappings "net.fabricmc:yarn:' + mappings_override
+                 + ':v2"', gradle_props)
+    # -> Write file
     with open('build.gradle', 'w') as gradle_file:
         gradle_file.write(gradle_props)
 

@@ -304,6 +304,43 @@ settings_files = [
 config_files = ['carpet.conf', 'xpbeacons.conf']
 branches = ['master']
 
+##### lunaar-carpet-addons #####
+# TODO: make this run
+#[[repos]]
+#host = 'github.com'
+#repo = 'Lunaar-SMP/lunaar-carpet-addons'
+#printer_version = 1
+#java_version = 8
+#entrypoint = 'carpetlunaaraddons.CarpetLunaarExtension'
+##settings_manager = ''
+#settings_files = ['carpetlunaaraddons.CarpetLunaarSettings']
+#config_files = ['carpet.conf']
+#branches = ['1.16']
+
+[[repos]]
+host = 'github.com'
+repo = 'Lunaar-SMP/lunaar-carpet-addons'
+printer_version = 1
+java_version = 16
+entrypoint = 'carpetlunaaraddons.CarpetLunaarExtension'
+#settings_manager = ''
+settings_files = ['carpetlunaaraddons.CarpetLunaarSettings']
+config_files = ['carpet.conf']
+branches = ['1.17']
+mappings_override = '1.17.1+build.65'
+
+[[repos]]
+host = 'github.com'
+repo = 'Lunaar-SMP/lunaar-carpet-addons'
+printer_version = 1
+java_version = 16
+entrypoint = 'carpetlunaaraddons.CarpetLunaarExtension'
+#settings_manager = ''
+settings_files = ['carpetlunaaraddons.CarpetLunaarSettings']
+config_files = ['carpet.conf']
+branches = ['1.18']
+mappings_override = '21w44a+build.10'
+
 ##### Rug #####
 [[repos]]
 host = 'github.com'
