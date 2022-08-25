@@ -160,12 +160,17 @@ def get_branch_data(
     if loom_override is not None:
         loom_version = loom_override
 
-    # Set loom version
+    # Set loom version and set carpet maven repo
     with open('build.gradle', 'r') as gradle_file:
         gradle_props = gradle_file.read()
     gradle_props = re.compile(
         r"""(id\s*(['"])fabric-loom\2\s*version\s*(['"]))[^\3]+?\3""") \
         .sub(r'\g<1>' + loom_version + r'\3', gradle_props)
+    gradle_props += """
+repositories {
+    maven { url = 'https://masa.dy.fi/maven' }
+}
+    """
     with open('build.gradle', 'w') as gradle_file:
         gradle_file.write(gradle_props)
 

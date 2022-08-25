@@ -228,17 +228,16 @@ config_files = ['carpet.conf']
 branches = ['1.18.x']
 
 ##### minitweaks #####
-# TODO: carpet repo missing in build.gradle
-#[[repos]]
-#host = 'github.com'
-#repo = 'manyrandomthings/minitweaks'
-#printer_version = 1
-#java_version = 8
-##entrypoint = ''
-##settings_manager = ''
-#settings_files = ['mini_tweaks.MiniTweaksSettings']
-#config_files = ['carpet.conf']
-#branches = ['1.15']
+[[repos]]
+host = 'github.com'
+repo = 'manyrandomthings/minitweaks'
+printer_version = 1
+java_version = 8
+#entrypoint = ''
+#settings_manager = ''
+settings_files = ['mini_tweaks.MiniTweaksSettings']
+config_files = ['carpet.conf']
+branches = ['1.15']
 
 [[repos]]
 host = 'github.com'
