@@ -148,8 +148,8 @@ def get_branch_data(
         with open(filename, 'r') as init_file:
             init_code = init_file.read()
         init_code = re.compile(
-            r'private\s*(static\s*(final\s*)?SettingsManager\s*.+;)') \
-            .sub(r'public \1', init_code)
+            r'private\b(.*\bstatic\b.*\bSettingsManager\b.+;)') \
+            .sub(r'public\1', init_code)
         with open(filename, 'w') as init_file:
             init_file.write(init_code)
 
@@ -167,7 +167,7 @@ def get_branch_data(
     if loom_override is not None:
         loom_version = loom_override
 
-    # Set loom version and set carpet maven repo
+    # Set loom version and carpet maven repo and remove publishing
     with open('build.gradle', 'r') as gradle_file:
         gradle_props = gradle_file.read()
     gradle_props = re.compile(
@@ -178,6 +178,8 @@ repositories {
     maven { url = 'https://masa.dy.fi/maven' }
 }
     """
+    gradle_props = re.compile(
+        r'publishing\s*\{[\s\S]*?\n\}').sub('', gradle_props)
     with open('build.gradle', 'w') as gradle_file:
         gradle_file.write(gradle_props)
 

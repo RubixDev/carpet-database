@@ -283,6 +283,27 @@ settings_files = ['minitweaks.MiniTweaksSettings']
 config_files = ['carpet.conf', 'minitweaks.conf']
 branches = ['1.19']
 
+##### XpBeacons #####
+[[repos]]
+host = 'github.com'
+repo = 'FracturedCode/XpBeacons'
+printer_version = 1
+java_version = 18
+#entrypoint = ''
+settings_manager = 'net.fracturedcode.xpbeacons.XpBeaconsExtension.customSettingsManager'
+settings_files = [
+    'net.fracturedcode.xpbeacons.XpBeaconsSimpleSettings',
+    'net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.HasteSettings',
+    'net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.SpeedSettings',
+    'net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.RegenerationSettings',
+    'net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.ResistanceSettings',
+    'net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.JumpBoostSettings',
+    'net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.StrengthSettings',
+    'net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.BeaconSettings',
+]
+config_files = ['carpet.conf', 'xpbeacons.conf']
+branches = ['master']
+
 ##### Rug #####
 [[repos]]
 host = 'github.com'
