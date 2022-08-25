@@ -25,7 +25,6 @@ for repo in repo_info:
             did_modify = False
             for rule in data:
                 if rule['name'] == new_rule['name'] \
-                        and rule['description'] == new_rule['description'] \
                         and rule['type'] == new_rule['type'] \
                         and rule['value'] == new_rule['value'] \
                         and rule['strict'] == new_rule['strict'] \
@@ -41,6 +40,7 @@ for repo in repo_info:
                         and rule['host'] == new_rule['host'] \
                         and rule['repo'] == new_rule['repo'] \
                         and rule['config_files'] == new_rule['config_files']:
+                    rule['description'] = new_rule['description']
                     if len(new_rule['validators']) > len(rule['validators']):
                         rule['validators'] = new_rule['validators']
                     rule['branches'].append(branch)
