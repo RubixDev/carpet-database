@@ -25,7 +25,7 @@ WORKDIR /app
 EOF
 
 # run image
-docker run -it -u 1000 \
+docker run --rm -u 1000 \
     -v "$PWD/data:/app/data" \
     -v "$PWD/cache/repos:/app/repos" \
     -v "$PWD/cache/gradle:/home/user/.gradle" \
