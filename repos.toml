@@ -117,7 +117,6 @@ java_version = 18
 settings_files = ['carpet_autocraftingtable.AutoCraftingTableSettings']
 config_files = ['carpet.conf']
 branches = ['master']
-loom_override = '0.10-SNAPSHOT'
 
 ##### carpet-fixes #####
 [[repos]]
