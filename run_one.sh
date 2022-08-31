@@ -28,7 +28,7 @@ WORKDIR /app
 EOF
 
 # run image
-docker run -it -u "$user_id" \
+docker run --rm -u "$user_id" \
     -v "$PWD/data:/app/data" \
     -v "$PWD/cache/repos:/app/repos" \
     -v "$PWD/cache/gradle:/home/user/.gradle" \
