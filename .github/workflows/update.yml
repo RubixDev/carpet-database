@@ -30,12 +30,15 @@ jobs:
 
       - name: Run with Java 18
         run: ./run_one.sh 18
+        continue-on-error: true
 
       - name: Run with Java 16
         run: ./run_one.sh 16
+        continue-on-error: true
 
       - name: Run with Java 8
         run: ./run_one.sh 8
+        continue-on-error: true
 
       - name: Combine output
         run: python combine.py
