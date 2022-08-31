@@ -11,6 +11,8 @@ case "$1" in
         ;;
 esac
 
+user_id="$(id -u)"
+
 # build docker image
 docker build -t "carpet-database-java-${java_version}" - << EOF
 FROM eclipse-temurin:${java_version}
@@ -19,13 +21,14 @@ COPY --from=python:3.10 /usr/bin /usr/bin
 COPY --from=python:3.10 /usr/lib /usr/lib
 COPY --from=python:3.10 /etc /etc
 
-RUN useradd -s /bin/bash -u 1000 -m user
-RUN mkdir -p /app && chown -R user:user /app
+RUN [ "$user_id" = 0 ] || useradd -s /bin/bash -u "$user_id" -m user
+RUN mkdir -p /app
+RUN [ "$user_id" = 0 ] || chown -R user:user /app
 WORKDIR /app
 EOF
 
 # run image
-docker run -it -u 1000 \
+docker run -it -u "$user_id" \
     -v "$PWD/data:/app/data" \
     -v "$PWD/cache/repos:/app/repos" \
     -v "$PWD/cache/gradle:/home/user/.gradle" \
