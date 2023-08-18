@@ -1,0 +1,1 @@
+{"commit":"c55ac65cb8742b321973699944f5a91246687047","rules":[{"name":"autoCraftingTable","description":"Auto-crafting table","type":"boolean","value":"false","strict":true,"categories":["CREATIVE","EXTRAS"],"options":["true","false"],"extras":[],"validators":[]}]}

@@ -1,0 +1,1 @@
+{"commit":"af5c647d9e4f2adff023db8216de032d6d773d55","rules":[{"name":"autoCraftingTable","description":"Converts the vanilla crafting tables into carpet's auto-crafting table","type":"boolean","value":"false","strict":true,"categories":["CREATIVE","EXTRAS"],"options":["true","false"],"extras":[],"validators":[]}]}
