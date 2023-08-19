@@ -371,7 +371,6 @@ settings_classes = [
 ]
 
 [mods.versions."1.16"]
-# TODO: maybe 1.16.3
 minecraft_version = "1.16.5"
 printer_version = "v1"
 settings_manager = "xpbeacons.XpBeaconsExtension.customSettingsManager"

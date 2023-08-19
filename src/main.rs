@@ -1,5 +1,5 @@
 use std::{
-    collections::{hash_map::DefaultHasher, BTreeSet},
+    collections::{hash_map::DefaultHasher, BTreeSet, HashMap, HashSet},
     fs::{self},
     hash::{Hash, Hasher},
     io::{IsTerminal, Write},
@@ -12,7 +12,10 @@ use fs_extra::dir::CopyOptions;
 use itertools::Itertools;
 use once_cell::sync::Lazy;
 use reqwest::Client;
-use schema::{Mod, ModVersion, ModsToml, PrinterVersion, VersionSource};
+use schema::{
+    CombinedJson, MinecraftMajorVersion, Mod, ModVersion, ModsToml, PrinterVersion, Rule,
+    VersionSource,
+};
 use serde_json::{json, Map, Value};
 use tokio::{
     io::{AsyncBufReadExt, AsyncReadExt, BufReader},
@@ -20,7 +23,7 @@ use tokio::{
 };
 use xshell::{cmd, Shell};
 
-use crate::schema::{Rule, RulesJson};
+use crate::schema::{RawRule, RulesJson};
 
 mod schema;
 
@@ -43,6 +46,8 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
+type Outputs = Vec<(String, String, MinecraftMajorVersion, RulesJson)>;
+
 async fn try_main() -> Result<()> {
     let sh = Shell::new()?;
     sh.create_dir(&*DATA_DIR)?;
@@ -58,11 +63,14 @@ async fn try_main() -> Result<()> {
         .collect::<BTreeSet<_>>();
     gen_template_mods(&sh, used_mc_versions)?;
 
+    let mut outputs: Outputs = vec![];
     for mod_ in &mods {
-        run_mod(&sh, mod_).await.with_context(|| {
+        run_mod(&sh, mod_, &mut outputs).await.with_context(|| {
             format!("\x1b[1;31mfailed to extract data for mod `{mod_:#?}`\x1b[0m")
         })?;
     }
+
+    combine(&sh, outputs)?;
 
     Ok(())
 }
@@ -157,6 +165,7 @@ async fn run_mod(
         settings_classes: default_settings_classes,
         versions,
     }: &Mod,
+    outputs: &mut Outputs,
 ) -> Result<()> {
     println!(
         "\x1b[1;32m{0}\n>>> getting rules for '{name}' <<<\n{0}\x1b[0m",
@@ -189,17 +198,16 @@ async fn run_mod(
         // skip, if data for version already exists for this version and is non-empty
         let output_data_file = DATA_DIR.join(format!("{slug}-{mc_major}.json"));
         let hash = hash((mc_major, version));
-        if sh
+        if let Some(output) = sh
             .read_file(&output_data_file)
             .ok()
             .and_then(|str| serde_json::from_str::<RulesJson>(&str).ok())
-            .as_ref()
-            .map_or(false, |old_data| {
-                old_data.hash == hash && !old_data.rules.is_empty()
-            })
         {
-            println!("\x1b[34m> data already up-to-date, skipping extraction\x1b[0m");
-            continue;
+            if output.hash == hash && !output.rules.is_empty() {
+                println!("\x1b[34m> data already up-to-date, skipping extraction\x1b[0m");
+                outputs.push((name.clone(), slug.clone(), *mc_major, output));
+                continue;
+            }
         }
 
         // remove any previous active mod
@@ -440,7 +448,7 @@ dependencies {{
             bail!("no output rules.json found");
         }
 
-        let mut rules = serde_json::from_str::<Vec<Rule>>(&sh.read_file("run/rules.json")?)?;
+        let mut rules = serde_json::from_str::<Vec<RawRule>>(&sh.read_file("run/rules.json")?)?;
         rules.sort_by_key(|rule| rule.name.clone());
         if rules.is_empty() {
             on_err();
@@ -449,10 +457,9 @@ dependencies {{
 
         // save final json to file
         println!("\x1b[36m>> saving output\x1b[0m");
-        sh.write_file(
-            output_data_file,
-            serde_json::to_string(&RulesJson { hash, rules })?,
-        )?;
+        let output = RulesJson { hash, rules };
+        sh.write_file(output_data_file, serde_json::to_string(&output)?)?;
+        outputs.push((name.clone(), slug.clone(), *mc_major, output));
     }
     Ok(())
 }
@@ -470,4 +477,93 @@ async fn get_github_dep(sh: &Shell, url: &str) -> Result<String> {
     sh.write_file("libs/mod.jar", bytes)?;
 
     Ok("files('libs/mod.jar')".into())
+}
+
+fn combine(
+    sh: &Shell,
+    outputs: Vec<(String, String, MinecraftMajorVersion, RulesJson)>,
+) -> Result<()> {
+    let mut combined: CombinedJson = vec![];
+
+    for (mod_name, mod_slug, minecraft_version, output) in outputs {
+        for rule in output.rules {
+            let new_rule = Rule {
+                name: rule.name,
+                description: rule.description,
+                type_: rule.type_,
+                value: rule.value,
+                strict: rule.strict,
+                categories: rule.categories,
+                options: rule.options,
+                extras: rule.extras,
+                validators: rule.validators,
+                config_files: rule.config_files,
+                mod_name: mod_name.clone(),
+                mod_slug: mod_slug.clone(),
+                minecraft_versions: vec![minecraft_version],
+            };
+
+            let mut did_modify = false;
+            for rule in &mut combined {
+                if rule.name == new_rule.name
+                    && rule.type_ == new_rule.type_
+                    && rule.value == new_rule.value
+                    && rule.strict == new_rule.strict
+                    && rule.categories == new_rule.categories
+                    && rule.options == new_rule.options
+                    && (rule
+                        .validators
+                        .iter()
+                        .all(|v| new_rule.validators.contains(v))
+                        || new_rule
+                            .validators
+                            .iter()
+                            .all(|v| rule.validators.contains(v)))
+                    && rule.config_files == new_rule.config_files
+                    && rule.mod_name == new_rule.mod_name
+                    && rule.mod_slug == new_rule.mod_slug
+                {
+                    rule.description = new_rule.description.clone();
+                    rule.validators = new_rule.validators.clone();
+                    rule.minecraft_versions.push(minecraft_version);
+                    did_modify = true;
+                }
+            }
+            if !did_modify {
+                combined.push(new_rule);
+            }
+        }
+    }
+    combined.sort_by_key(|rule| rule.name.clone());
+
+    // write file
+    sh.write_file(
+        DATA_DIR.join("combined.json"),
+        serde_json::to_string(&combined)?,
+    )?;
+
+    // get and print stats
+    let mut mod_counts: HashMap<String, HashSet<String>> = HashMap::new();
+    for rule in &combined {
+        mod_counts
+            .entry(rule.mod_name.clone())
+            .or_default()
+            .insert(rule.name.clone());
+    }
+    let mut mod_counts = mod_counts
+        .into_iter()
+        .map(|(name, set)| (name, set.len()))
+        .collect_vec();
+    mod_counts.sort_by(|a, b| b.1.cmp(&a.1));
+    let total_count: usize = mod_counts.iter().map(|(_, count)| count).sum();
+
+    println!("\x1b[1;32m>>> Rules parsed: {total_count}\x1b[0m");
+    let mut stats_md = format!("**Rules parsed**: {total_count}\n\n");
+    for (mod_name, count) in &mod_counts {
+        println!("\x1b[32m>> {mod_name}: {count}\x1b[0m");
+        stats_md += &format!("**{mod_name}**: {count}\\\n");
+    }
+    sh.write_file(WORKSPACE_DIR.join("stats.md"), stats_md)?;
+
+    Ok(())
 }

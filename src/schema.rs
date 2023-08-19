@@ -1,20 +1,48 @@
 use std::collections::BTreeMap;
 
 use serde::{Deserialize, Serialize};
-use serde_json::{Map, Value};
+
+pub type CombinedJson = Vec<Rule>;
+
+#[derive(Debug, Clone, Serialize)]
+pub struct Rule {
+    pub name: String,
+    pub description: String,
+    #[serde(rename = "type")]
+    pub type_: String,
+    pub value: String,
+    pub strict: bool,
+    pub categories: Vec<String>,
+    pub options: Vec<String>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub extras: Vec<String>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub validators: Vec<String>,
+    pub config_files: Vec<String>,
+    pub mod_name: String,
+    pub mod_slug: String,
+    pub minecraft_versions: Vec<MinecraftMajorVersion>,
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesJson {
     pub hash: u64,
-    pub rules: Vec<Rule>,
+    pub rules: Vec<RawRule>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Rule {
+pub struct RawRule {
     pub name: String,
-    /// All other keys are not relevant here, just keep them as is
-    #[serde(flatten)]
-    pub rest: Map<String, Value>,
+    pub description: String,
+    #[serde(rename = "type")]
+    pub type_: String,
+    pub value: String,
+    pub strict: bool,
+    pub categories: Vec<String>,
+    pub options: Vec<String>,
+    pub extras: Vec<String>,
+    pub validators: Vec<String>,
+    pub config_files: Vec<String>,
 }
 
 #[derive(Debug, Clone, Hash, Deserialize)]
@@ -67,7 +95,7 @@ pub enum PrinterVersion {
 
 macro_rules! mc_version_enum {
     ($name:ident; $($variant:ident = $str:literal),+ $(,)?) => {
-        #[derive(Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Deserialize, strum::Display)]
+        #[derive(Debug, Clone, Copy, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, strum::Display)]
         pub enum $name {$(
             #[serde(rename = $str)]
             #[strum(serialize = $str)]
