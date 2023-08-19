@@ -561,7 +561,7 @@ fn combine(
     let mut stats_md = format!("**Rules parsed**: {total_count}\n\n");
     for (mod_name, count) in &mod_counts {
         println!("\x1b[32m>> {mod_name}: {count}\x1b[0m");
-        stats_md += &format!("**{mod_name}**: {count}\\\n");
+        stats_md += &format!("- **{mod_name}**: {count}\n");
     }
     sh.write_file(WORKSPACE_DIR.join("stats.md"), stats_md)?;
 
