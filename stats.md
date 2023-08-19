@@ -1,8 +1,8 @@
 **Rules parsed**: 726
 
 **Carpet-Fixes**: 308\
-**Carpet**: 104\
 **Rug**: 104\
+**Carpet**: 104\
 **Carpet Extra**: 57\
 **Minitweaks**: 46\
 **XpBeacons**: 43\
