@@ -436,3 +436,40 @@ source = { host = "GitHub", tag = "v0.5.0", artifact = "carpet-lunaar-addons-1.1
 # printer_version = "v1"
 # dependencies = ["maven.modrinth:carpet:1.4.69"]
 # source = { host = "GitHub", tag = "v0.5.0", artifact = "carpet-lunaar-addons-1.18_experimental-snapshot-1-0.5.0.jar" }
+
+[[mods]]
+name = "Carpet Gamerules"
+slug = "carpetgamerules"
+entrypoint = "de.rubixdev.carpetgamerules.CarpetGamerulesServer"
+settings_manager = "de.rubixdev.carpetgamerules.CarpetGamerulesServer.settingsManager"
+settings_classes = ["de.rubixdev.carpetgamerules.CarpetGamerulesSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "Modrinth", version = "2.0.0+1.16.5" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "Modrinth", version = "2.0.0+1.17.1" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "Modrinth", version = "2.0.0+1.18.2" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "Modrinth", version = "2.0.0+1.19.4" }
+
+[mods.versions."1.20"]
+minecraft_version = "1.20.1"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.112"]
+source = { host = "Modrinth", version = "2.0.0+1.20.1" }
