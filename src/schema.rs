@@ -21,7 +21,9 @@ pub struct Rule {
     pub config_files: Vec<String>,
     pub mod_name: String,
     pub mod_slug: String,
+    pub mod_url: String,
     pub minecraft_versions: Vec<MinecraftMajorVersion>,
+    pub version_urls: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -54,9 +56,14 @@ pub struct ModsToml {
 pub struct Mod {
     pub name: String,
     pub slug: String,
+    /// optional override if not the same as modrinth
+    pub curseforge_slug: Option<String>,
     /// only for CurseForge
     #[serde(default)]
     pub project_id: i32,
+    /// only for GitHub
+    #[serde(default)]
+    pub repo: String,
     pub entrypoint: Option<String>,
     pub settings_manager: Option<String>,
     pub settings_classes: Option<Vec<String>>,
@@ -81,7 +88,7 @@ pub struct ModVersion {
 pub enum VersionSource {
     Modrinth { version: String },
     CurseForge { file_id: i32 },
-    GitHub { download_url: String },
+    GitHub { tag: String, artifact: String },
 }
 
 #[derive(Debug, Clone, Hash, Deserialize, strum::Display)]

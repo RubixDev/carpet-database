@@ -46,7 +46,14 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-type Outputs = Vec<(String, String, MinecraftMajorVersion, RulesJson)>;
+struct Output {
+    mod_name: String,
+    mod_slug: String,
+    mod_url: String,
+    minecraft_version: MinecraftMajorVersion,
+    version_url: String,
+    rules: Vec<RawRule>,
+}
 
 async fn try_main() -> Result<()> {
     let sh = Shell::new()?;
@@ -63,7 +70,7 @@ async fn try_main() -> Result<()> {
         .collect::<BTreeSet<_>>();
     gen_template_mods(&sh, used_mc_versions)?;
 
-    let mut outputs: Outputs = vec![];
+    let mut outputs: Vec<Output> = vec![];
     for mod_ in &mods {
         run_mod(&sh, mod_, &mut outputs).await.with_context(|| {
             format!("\x1b[1;31mfailed to extract data for mod `{mod_:#?}`\x1b[0m")
@@ -159,18 +166,33 @@ async fn run_mod(
     Mod {
         name,
         slug,
+        curseforge_slug,
         project_id,
+        repo,
         entrypoint: default_entrypoint,
         settings_manager: default_settings_manager,
         settings_classes: default_settings_classes,
         versions,
     }: &Mod,
-    outputs: &mut Outputs,
+    outputs: &mut Vec<Output>,
 ) -> Result<()> {
     println!(
         "\x1b[1;32m{0}\n>>> getting rules for '{name}' <<<\n{0}\x1b[0m",
         "-".repeat(50)
     );
+    let curseforge_slug = curseforge_slug.as_ref().unwrap_or(slug);
+    let mod_url = match versions
+        .values()
+        .next_back()
+        .with_context(|| "mod versions must be non-empty")?
+        .source
+    {
+        VersionSource::Modrinth { .. } => format!("https://modrinth.com/mod/{slug}"),
+        VersionSource::CurseForge { .. } => {
+            format!("https://curseforge.com/minecraft/mc-mods/{curseforge_slug}")
+        }
+        VersionSource::GitHub { .. } => format!("https://github.com/{repo}"),
+    };
     for (mc_major, version) in versions {
         let ModVersion {
             minecraft_version,
@@ -194,10 +216,29 @@ async fn run_mod(
             .as_ref()
             .or(default_settings_classes.as_ref())
             .with_context(|| "no settings classes specified")?;
+        let version_url = match source {
+            VersionSource::Modrinth { version } => {
+                format!("https://modrinth.com/mod/{slug}/version/{version}")
+            }
+            VersionSource::CurseForge { file_id } => {
+                format!(
+                    "https://curseforge.com/minecraft/mc-mods/{curseforge_slug}/files/{file_id}"
+                )
+            }
+            VersionSource::GitHub { tag, .. } => {
+                format!("https://github.com/{repo}/releases/tag/{tag}")
+            }
+        };
 
         // skip, if data for version already exists for this version and is non-empty
         let output_data_file = DATA_DIR.join(format!("{slug}-{mc_major}.json"));
-        let hash = hash((mc_major, version));
+        let hash = hash((
+            mc_major,
+            version,
+            entrypoint,
+            settings_manager,
+            settings_classes,
+        ));
         if let Some(output) = sh
             .read_file(&output_data_file)
             .ok()
@@ -205,7 +246,14 @@ async fn run_mod(
         {
             if output.hash == hash && !output.rules.is_empty() {
                 println!("\x1b[34m> data already up-to-date, skipping extraction\x1b[0m");
-                outputs.push((name.clone(), slug.clone(), *mc_major, output));
+                outputs.push(Output {
+                    mod_name: name.clone(),
+                    mod_slug: slug.clone(),
+                    mod_url: mod_url.clone(),
+                    minecraft_version: *mc_major,
+                    version_url,
+                    rules: output.rules,
+                });
                 continue;
             }
         }
@@ -341,7 +389,9 @@ public interface PrivateSettingsManagerAccessor {{
             VersionSource::CurseForge { file_id } => {
                 format!("'curse.maven:{slug}-{project_id}:{file_id}'")
             }
-            VersionSource::GitHub { download_url } => get_github_dep(sh, download_url).await?,
+            VersionSource::GitHub { tag, artifact } => {
+                get_github_dep(sh, repo, tag, artifact).await?
+            }
         };
         modify_file(ACTIVE_DIR.join("build.gradle"), |str| {
             let extra_deps = dependencies
@@ -459,7 +509,14 @@ dependencies {{
         println!("\x1b[36m>> saving output\x1b[0m");
         let output = RulesJson { hash, rules };
         sh.write_file(output_data_file, serde_json::to_string(&output)?)?;
-        outputs.push((name.clone(), slug.clone(), *mc_major, output));
+        outputs.push(Output {
+            mod_name: name.clone(),
+            mod_slug: slug.clone(),
+            mod_url: mod_url.clone(),
+            minecraft_version: *mc_major,
+            version_url,
+            rules: output.rules,
+        });
     }
     Ok(())
 }
@@ -470,8 +527,9 @@ fn hash(state: impl Hash) -> u64 {
     hasher.finish()
 }
 
-async fn get_github_dep(sh: &Shell, url: &str) -> Result<String> {
+async fn get_github_dep(sh: &Shell, repo: &str, tag: &str, artifact: &str) -> Result<String> {
     // download jar
+    let url = format!("https://github.com/{repo}/releases/download/{tag}/{artifact}");
     println!("\x1b[34m> downloading jar from '{url}'\x1b[0m");
     let bytes = CLIENT.get(url).send().await?.bytes().await?;
     sh.write_file("libs/mod.jar", bytes)?;
@@ -479,14 +537,19 @@ async fn get_github_dep(sh: &Shell, url: &str) -> Result<String> {
     Ok("files('libs/mod.jar')".into())
 }
 
-fn combine(
-    sh: &Shell,
-    outputs: Vec<(String, String, MinecraftMajorVersion, RulesJson)>,
-) -> Result<()> {
+fn combine(sh: &Shell, outputs: Vec<Output>) -> Result<()> {
     let mut combined: CombinedJson = vec![];
 
-    for (mod_name, mod_slug, minecraft_version, output) in outputs {
-        for rule in output.rules {
+    for Output {
+        mod_name,
+        mod_slug,
+        mod_url,
+        minecraft_version,
+        version_url,
+        rules,
+    } in outputs
+    {
+        for rule in rules {
             let new_rule = Rule {
                 name: rule.name,
                 description: rule.description,
@@ -500,7 +563,9 @@ fn combine(
                 config_files: rule.config_files,
                 mod_name: mod_name.clone(),
                 mod_slug: mod_slug.clone(),
+                mod_url: mod_url.clone(),
                 minecraft_versions: vec![minecraft_version],
+                version_urls: vec![version_url.clone()],
             };
 
             let mut did_modify = false;
@@ -522,10 +587,12 @@ fn combine(
                     && rule.config_files == new_rule.config_files
                     && rule.mod_name == new_rule.mod_name
                     && rule.mod_slug == new_rule.mod_slug
+                    && rule.mod_url == new_rule.mod_url
                 {
                     rule.description = new_rule.description.clone();
                     rule.validators = new_rule.validators.clone();
                     rule.minecraft_versions.push(minecraft_version);
+                    rule.version_urls.push(version_url.clone());
                     did_modify = true;
                 }
             }
