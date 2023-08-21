@@ -1,5 +1,5 @@
 use std::{
-    collections::{hash_map::DefaultHasher, BTreeSet, HashMap, HashSet},
+    collections::{hash_map::DefaultHasher, BTreeMap, BTreeSet, HashSet},
     fs::{self},
     hash::{Hash, Hasher},
     io::{IsTerminal, Write},
@@ -610,7 +610,7 @@ fn combine(sh: &Shell, outputs: Vec<Output>) -> Result<()> {
     )?;
 
     // get and print stats
-    let mut mod_counts: HashMap<String, HashSet<String>> = HashMap::new();
+    let mut mod_counts: BTreeMap<String, HashSet<String>> = BTreeMap::new();
     for rule in &combined {
         mod_counts
             .entry(rule.mod_name.clone())
