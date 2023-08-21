@@ -171,6 +171,7 @@ async fn run_mod(
         repo,
         entrypoint: default_entrypoint,
         settings_manager: default_settings_manager,
+        settings_manager_class: default_settings_manager_class,
         settings_classes: default_settings_classes,
         versions,
     }: &Mod,
@@ -193,16 +194,20 @@ async fn run_mod(
         }
         VersionSource::GitHub { .. } => format!("https://github.com/{repo}"),
     };
-    for (mc_major, version) in versions {
-        let ModVersion {
+    for (
+        mc_major,
+        ModVersion {
             minecraft_version,
             printer_version,
             entrypoint,
             settings_manager,
+            settings_manager_class,
             settings_classes,
             dependencies,
             source,
-        } = version;
+        },
+    ) in versions
+    {
         println!("\x1b[1;36m>>> getting rules for '{name}' for Minecraft {mc_major} using {minecraft_version} with printer {printer_version}\x1b[0m");
         let entrypoint = entrypoint
             .as_ref()
@@ -212,12 +217,24 @@ async fn run_mod(
             .as_ref()
             .or(default_settings_manager.as_ref())
             .filter(|s| !s.is_empty());
+        let settings_manager_class = settings_manager_class
+            .as_ref()
+            .or(default_settings_manager_class.as_ref())
+            .filter(|s| !s.is_empty())
+            .map(|s| s.as_str())
+            .unwrap_or(match printer_version {
+                PrinterVersion::V1 | PrinterVersion::V2 => "carpet.settings.SettingsManager",
+                PrinterVersion::V3 => "carpet.api.settings.SettingsManager",
+                PrinterVersion::MagicLibV1 => {
+                    "top.hendrixshen.magiclib.carpet.impl.WrappedSettingManager"
+                }
+            });
         let settings_classes = settings_classes
             .as_ref()
             .or(default_settings_classes.as_ref())
             .with_context(|| "no settings classes specified")?;
         let version_url = match source {
-            VersionSource::Modrinth { version } => {
+            VersionSource::Modrinth { version, .. } => {
                 format!("https://modrinth.com/mod/{slug}/version/{version}")
             }
             VersionSource::CurseForge { file_id } => {
@@ -234,10 +251,14 @@ async fn run_mod(
         let output_data_file = DATA_DIR.join(format!("{slug}-{mc_major}.json"));
         let hash = hash((
             mc_major,
-            version,
+            minecraft_version,
+            printer_version,
             entrypoint,
             settings_manager,
+            settings_manager_class,
             settings_classes,
+            dependencies,
+            source,
         ));
         if let Some(output) = sh
             .read_file(&output_data_file)
@@ -295,15 +316,12 @@ async fn run_mod(
             }
             PrinterVersion::V2 => include_str!("../printers/V2Printer.java"),
             PrinterVersion::V3 => include_str!("../printers/V3Printer.java"),
+            PrinterVersion::MagicLibV1 => include_str!("../printers/MagicLibV1Printer.java"),
         };
         if let Some(settings_manager) = settings_manager {
             let (class_path, field_name) = settings_manager
                 .rsplit_once('.')
                 .with_context(|| format!("invalid settings_manager path '{settings_manager}'"))?;
-            let settings_manager_class = match printer_version {
-                PrinterVersion::V1 | PrinterVersion::V2 => "carpet.settings.SettingsManager",
-                PrinterVersion::V3 => "carpet.api.settings.SettingsManager",
-            };
             sh.write_file(
                 "src/main/java/mixin/PrivateSettingsManagerAccessor.java",
                 format!(
@@ -383,15 +401,13 @@ public interface PrivateSettingsManagerAccessor {{
         // add dependencies
         println!("\x1b[36m>> adding dependencies\x1b[0m");
         let main_mod_dep = match source {
-            VersionSource::Modrinth { version } => {
-                format!("'maven.modrinth:{slug}:{version}'")
+            VersionSource::Modrinth { version, filename } => {
+                get_modrinth_dep(sh, slug, version, filename).await?
             }
             VersionSource::CurseForge { file_id } => {
                 format!("'curse.maven:{slug}-{project_id}:{file_id}'")
             }
-            VersionSource::GitHub { tag, artifact } => {
-                get_github_dep(sh, repo, tag, artifact).await?
-            }
+            VersionSource::GitHub { tag, asset } => get_github_dep(sh, repo, tag, asset).await?,
         };
         modify_file(ACTIVE_DIR.join("build.gradle"), |str| {
             let extra_deps = dependencies
@@ -414,9 +430,11 @@ repositories {{
     // jitpack for GitHub
     maven {{ url = "https://jitpack.io" }}
     // CurseForge maven
-    maven {{
-        url "https://cursemaven.com"
-        content {{
+    exclusiveContent {{
+        forRepository {{
+            maven {{ url = "https://cursemaven.com" }}
+        }}
+        filter {{
             includeGroup "curse.maven"
         }}
     }}
@@ -434,7 +452,7 @@ dependencies {{
         let is_terminal = std::io::stdout().lock().is_terminal();
         let mut stdout_log = vec![];
         let mut cmd = Command::new(ACTIVE_DIR.join("gradlew"))
-            .arg("runServer")
+            .arg("runClient")
             .current_dir(&*ACTIVE_DIR)
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
@@ -527,11 +545,46 @@ fn hash(state: impl Hash) -> u64 {
     hasher.finish()
 }
 
-async fn get_github_dep(sh: &Shell, repo: &str, tag: &str, artifact: &str) -> Result<String> {
-    // download jar
-    let url = format!("https://github.com/{repo}/releases/download/{tag}/{artifact}");
+async fn get_modrinth_dep(
+    sh: &Shell,
+    slug: &str,
+    version: &str,
+    filename: &Option<String>,
+) -> Result<String> {
+    let Some(filename) = filename else {
+        return Ok(format!("'maven.modrinth:{slug}:{version}'"));
+    };
+
+    // download jar manually, because I don't think there is a way to get a file named
+    // "CarpetTCTCAddition-1.14.4-2.2.201+8009659-stable.jar" from the maven when the primary file
+    // is called "CarpetTCTCAddition-all-2.2.201+8009659-stable.jar"
+    let url = format!("https://api.modrinth.com/maven/maven/modrinth/{slug}/{version}/{filename}");
     println!("\x1b[34m> downloading jar from '{url}'\x1b[0m");
-    let bytes = CLIENT.get(url).send().await?.bytes().await?;
+    let res = CLIENT.get(url).send().await?;
+    if !res.status().is_success() {
+        bail!(
+            "could not download jar: Modrinth responded with status code {}",
+            res.status()
+        );
+    }
+    let bytes = res.bytes().await?;
+    sh.write_file("libs/mod.jar", bytes)?;
+
+    Ok("files('libs/mod.jar')".into())
+}
+
+async fn get_github_dep(sh: &Shell, repo: &str, tag: &str, asset: &str) -> Result<String> {
+    // download jar
+    let url = format!("https://github.com/{repo}/releases/download/{tag}/{asset}");
+    println!("\x1b[34m> downloading jar from '{url}'\x1b[0m");
+    let res = CLIENT.get(url).send().await?;
+    if !res.status().is_success() {
+        bail!(
+            "could not download jar: GitHub responded with status code {}",
+            res.status()
+        );
+    }
+    let bytes = res.bytes().await?;
     sh.write_file("libs/mod.jar", bytes)?;
 
     Ok("files('libs/mod.jar')".into())

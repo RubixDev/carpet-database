@@ -66,6 +66,7 @@ pub struct Mod {
     pub repo: String,
     pub entrypoint: Option<String>,
     pub settings_manager: Option<String>,
+    pub settings_manager_class: Option<String>,
     pub settings_classes: Option<Vec<String>>,
     pub versions: BTreeMap<MinecraftMajorVersion, ModVersion>,
 }
@@ -76,6 +77,7 @@ pub struct ModVersion {
     pub printer_version: PrinterVersion,
     pub entrypoint: Option<String>,
     pub settings_manager: Option<String>,
+    pub settings_manager_class: Option<String>,
     pub settings_classes: Option<Vec<String>>,
     /// dependencies other than Fabric API
     #[serde(default)]
@@ -86,9 +88,17 @@ pub struct ModVersion {
 #[derive(Debug, Clone, Hash, Deserialize)]
 #[serde(tag = "host")]
 pub enum VersionSource {
-    Modrinth { version: String },
-    CurseForge { file_id: i32 },
-    GitHub { tag: String, artifact: String },
+    Modrinth {
+        version: String,
+        filename: Option<String>,
+    },
+    CurseForge {
+        file_id: i32,
+    },
+    GitHub {
+        tag: String,
+        asset: String,
+    },
 }
 
 #[derive(Debug, Clone, Hash, Deserialize, strum::Display)]
@@ -98,6 +108,9 @@ pub enum PrinterVersion {
     V1,
     V2,
     V3,
+    #[serde(rename = "magiclib-v1")]
+    #[strum(serialize = "magiclib-v1")]
+    MagicLibV1,
 }
 
 macro_rules! mc_version_enum {

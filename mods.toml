@@ -140,7 +140,7 @@ entrypoint = ""
 settings_manager = ""
 settings_classes = ["mini_tweaks.MiniTweaksSettings"]
 dependencies = ["maven.modrinth:carpet:1.4.8"]
-source = { host = "GitHub", tag = "1.0.1", artifact = "mini-tweaks-1.0.1-1.15.2.jar" }
+source = { host = "GitHub", tag = "1.0.1", asset = "mini-tweaks-1.0.1-1.15.2.jar" }
 
 [mods.versions."1.16"]
 minecraft_version = "1.16.5"
@@ -189,7 +189,7 @@ printer_version = "v1"
 settings_manager = ""
 settings_classes = ["carpetfixes.CarpetFixesSettings"]
 dependencies = ["maven.modrinth:carpet:1.4.44"]
-source = { host = "GitHub", tag = "v0.0.6", artifact = "carpetfixes-1.16.5-0.0.6.jar" }
+source = { host = "GitHub", tag = "v0.0.6", asset = "carpetfixes-1.16.5-0.0.6.jar" }
 
 [mods.versions."1.17"]
 minecraft_version = "1.17.1"
@@ -238,43 +238,43 @@ settings_classes = ["carpet_autocraftingtable.AutoCraftingTableSettings"]
 minecraft_version = "1.14.4"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.3.7"]
-source = { host = "GitHub", tag = "v1.0", artifact = "carpet-autocraftingtable-1.14.4-1.3.0.jar" }
+source = { host = "GitHub", tag = "v1.0", asset = "carpet-autocraftingtable-1.14.4-1.3.0.jar" }
 
 [mods.versions."1.15"]
 minecraft_version = "1.15.2"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.8"]
-source = { host = "GitHub", tag = "v1.0", artifact = "carpet-autocraftingtable-1.15.2-1.3.11.jar" }
+source = { host = "GitHub", tag = "v1.0", asset = "carpet-autocraftingtable-1.15.2-1.3.11.jar" }
 
 [mods.versions."1.16"]
 minecraft_version = "1.16.5"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.44"]
-source = { host = "GitHub", tag = "v1.4", artifact = "carpet-autocraftingtable-1.16.4-1.4.17_build2.jar" }
+source = { host = "GitHub", tag = "v1.4", asset = "carpet-autocraftingtable-1.16.4-1.4.17_build2.jar" }
 
 [mods.versions."1.17"]
 minecraft_version = "1.17.1"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.57"]
-source = { host = "GitHub", tag = "1.4.43", artifact = "carpet-autocraftingtable-1.17.1-1.4.43.jar" }
+source = { host = "GitHub", tag = "1.4.43", asset = "carpet-autocraftingtable-1.17.1-1.4.43.jar" }
 
 [mods.versions."1.18"]
 minecraft_version = "1.18.2"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.69"]
-source = { host = "GitHub", tag = "1.4.56", artifact = "carpet-autocraftingtable-1.18-1.4.56.jar" }
+source = { host = "GitHub", tag = "1.4.56", asset = "carpet-autocraftingtable-1.18-1.4.56.jar" }
 
 [mods.versions."1.19"]
 minecraft_version = "1.19.4"
 printer_version = "v3"
 dependencies = ["maven.modrinth:carpet:1.4.101"]
-source = { host = "GitHub", tag = "1.4.100", artifact = "carpet-autocraftingtable-1.19.4-1.4.100.jar" }
+source = { host = "GitHub", tag = "1.4.100", asset = "carpet-autocraftingtable-1.19.4-1.4.100.jar" }
 
 [mods.versions."1.20"]
 minecraft_version = "1.20.1"
 printer_version = "v3"
 dependencies = ["maven.modrinth:carpet:1.4.112"]
-source = { host = "GitHub", tag = "1.4.112", artifact = "carpet-autocraftingtable-1.20-1.4.112.jar" }
+source = { host = "GitHub", tag = "1.4.112", asset = "carpet-autocraftingtable-1.20-1.4.112.jar" }
 
 [[mods]]
 name = "Carpet Sky Additions"
@@ -291,7 +291,7 @@ entrypoint = "skyblock.SkyBlockExtension"
 settings_manager = "skyblock.SkyBlockExtension.mySettingManager"
 settings_classes = ["skyblock.SkyBlockSettings"]
 dependencies = ["maven.modrinth:carpet:1.4.44"]
-source = { host = "GitHub", tag = "2.1.4", artifact = "skyblock-1.16.5-2.1.4.jar" }
+source = { host = "GitHub", tag = "2.1.4", asset = "skyblock-1.16.5-2.1.4.jar" }
 
 [mods.versions."1.17"]
 minecraft_version = "1.17.1"
@@ -300,7 +300,7 @@ entrypoint = "com.jsorrell.skyblock.SkyBlockExtension"
 settings_manager = "com.jsorrell.skyblock.SkyBlockExtension.settingsManager"
 settings_classes = ["com.jsorrell.skyblock.SkyBlockSettings"]
 dependencies = ["maven.modrinth:carpet:1.4.57"]
-source = { host = "GitHub", tag = "1.17.1-3.1.0", artifact = "skyblock-1.17.1-3.1.0.jar" }
+source = { host = "GitHub", tag = "1.17.1-3.1.0", asset = "skyblock-1.17.1-3.1.0.jar" }
 
 [mods.versions."1.18"]
 minecraft_version = "1.18.2"
@@ -309,7 +309,7 @@ entrypoint = "com.jsorrell.skyblock.SkyBlockExtension"
 settings_manager = "com.jsorrell.skyblock.SkyBlockExtension.settingsManager"
 settings_classes = ["com.jsorrell.skyblock.SkyBlockSettings"]
 dependencies = ["maven.modrinth:carpet:1.4.69"]
-source = { host = "GitHub", tag = "1.18.2-3.2.4", artifact = "skyblock-1.18.2-3.2.4.jar" }
+source = { host = "GitHub", tag = "1.18.2-3.2.4", asset = "skyblock-1.18.2-3.2.4.jar" }
 
 [mods.versions."1.19"]
 minecraft_version = "1.19.4"
@@ -339,25 +339,25 @@ settings_classes = ["carpetaddons.CarpetAddonsSettings"]
 minecraft_version = "1.15.2"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.8"]
-source = { host = "GitHub", tag = "v1.0.4", artifact = "carpet-addons-1.15.2-1.0.4+v201031.jar" }
+source = { host = "GitHub", tag = "v1.0.4", asset = "carpet-addons-1.15.2-1.0.4+v201031.jar" }
 
 [mods.versions."1.16"]
 minecraft_version = "1.16.5"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.44"]
-source = { host = "GitHub", tag = "v1.0.10", artifact = "carpet-addons-1.16.5-1.0.10+v220627.jar" }
+source = { host = "GitHub", tag = "v1.0.10", asset = "carpet-addons-1.16.5-1.0.10+v220627.jar" }
 
 [mods.versions."1.17"]
 minecraft_version = "1.17.1"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.57"]
-source = { host = "GitHub", tag = "v1.0.10", artifact = "carpet-addons-1.17-1.0.10+v220627.jar" }
+source = { host = "GitHub", tag = "v1.0.10", asset = "carpet-addons-1.17-1.0.10+v220627.jar" }
 
 [mods.versions."1.18"]
 minecraft_version = "1.18.2"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.69"]
-source = { host = "GitHub", tag = "v1.0.10", artifact = "carpet-addons-1.18.2-1.0.10+v220627.jar" }
+source = { host = "GitHub", tag = "v1.0.10", asset = "carpet-addons-1.18.2-1.0.10+v220627.jar" }
 
 [[mods]]
 name = "XpBeacons"
@@ -422,20 +422,20 @@ settings_classes = ["carpetlunaaraddons.CarpetLunaarSettings"]
 minecraft_version = "1.16.5"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.44"]
-source = { host = "GitHub", tag = "v0.5.0", artifact = "carpet-lunaar-addons-1.16.5-0.5.0.jar" }
+source = { host = "GitHub", tag = "v0.5.0", asset = "carpet-lunaar-addons-1.16.5-0.5.0.jar" }
 
 [mods.versions."1.17"]
 minecraft_version = "1.17.1"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.57"]
-source = { host = "GitHub", tag = "v0.5.0", artifact = "carpet-lunaar-addons-1.17.1-0.5.0.jar" }
+source = { host = "GitHub", tag = "v0.5.0", asset = "carpet-lunaar-addons-1.17.1-0.5.0.jar" }
 
 # only supports 1.18 snapshots
 # [mods.versions."1.18"]
 # minecraft_version = "1.18.2"
 # printer_version = "v1"
 # dependencies = ["maven.modrinth:carpet:1.4.69"]
-# source = { host = "GitHub", tag = "v0.5.0", artifact = "carpet-lunaar-addons-1.18_experimental-snapshot-1-0.5.0.jar" }
+# source = { host = "GitHub", tag = "v0.5.0", asset = "carpet-lunaar-addons-1.18_experimental-snapshot-1-0.5.0.jar" }
 
 [[mods]]
 name = "Carpet Gamerules"
@@ -473,3 +473,440 @@ minecraft_version = "1.20.1"
 printer_version = "v3"
 dependencies = ["maven.modrinth:carpet:1.4.112"]
 source = { host = "Modrinth", version = "2.0.0+1.20.1" }
+
+[[mods]]
+name = "Anvil Crush"
+slug = "anvil-crush"
+entrypoint = "technicalma.carpet.anvilcrush.AnvilCrushServer"
+settings_classes = ["technicalma.carpet.anvilcrush.AnvilCrushSettings"]
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:M2G5yWMw"]
+source = { host = "Modrinth", version = "1.6.0" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v2"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "Modrinth", version = "1.6.2" }
+
+[[mods]]
+name = "Bastion Carpet"
+slug = "bastion-carpet"
+repo = "luisch444/Bastion-Carpet"
+entrypoint = "carpet.bastion.BastionCarpetServer"
+settings_classes = ["carpet.bastion.BastionCarpetSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "1.0.5-mc-1.16.4-5", asset = "bastion-carpet-1.0.5.jar" }
+
+[[mods]]
+name = "Carpet DRC Addition"
+slug = "carpet-drc-addition"
+repo = "DreamRealmCraft/carpet-DRC-Addition"
+entrypoint = "com.github.Primeppzi.DRCAdditionServer"
+settings_classes = ["com.github.Primeppzi.DRCAdditionSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "1.0.3", asset = "carpet-DRC-Addition-1.0.3-1.16.5.jar" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "GitHub", tag = "1.0.4", asset = "carpet-DRC-Addition-1.0.4.jar" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v2"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "GitHub", tag = "1.0.5", asset = "carpet-DRC-Addition-1.0.5-1.19.2.jar" }
+
+[[mods]]
+name = "Carpet RedCraft Addons"
+slug = "carpet-redcraft-addons"
+project_id = 493767
+entrypoint = "it.multicoredev.carpetredcraftaddons.CarpetRedCraftExtension"
+settings_classes = ["it.multicoredev.carpetredcraftaddons.CarpetRedCraftSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "CurseForge", file_id = 3350522 }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "CurseForge", file_id = 3615411 }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:M2G5yWMw"]
+source = { host = "CurseForge", file_id = 3615412 }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.79"]
+source = { host = "CurseForge", file_id = 3824361 }
+
+[[mods]]
+name = "Carpet Shadow"
+slug = "carpet-shadow"
+project_id = 581787
+repo = "mattymatty97/carpet-shadow"
+entrypoint = "com.carpet_shadow.CarpetShadow"
+settings_classes = ["com.carpet_shadow.CarpetShadowSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "CurseForge", file_id = 3655190 }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+settings_classes = [
+    "com.carpet_shadow.CarpetShadowSettings",
+    "com.carpet_shadow.CarpetShadowServerSettings",
+]
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "CurseForge", file_id = 3827760 }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+settings_classes = [
+    "com.carpet_shadow.CarpetShadowSettings",
+    "com.carpet_shadow.CarpetShadowServerSettings",
+]
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "CurseForge", file_id = 3902339 }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "CurseForge", file_id = 4607620 }
+
+[mods.versions."1.20"]
+minecraft_version = "1.20.1"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.112"]
+# for some strange reason cursemaven refuses to serve this version (see https://github.com/Wyn-Price/CurseMaven/issues/20)
+# so we resort to GitHub for now
+# source = { host = "CurseForge", file_id = 4614346 }
+source = { host = "GitHub", tag = "v1.10.2-MC1.20.1%2B", asset = "carpet-shadow-1.10.2-MC1.20.1+.build.3.jar" }
+
+[[mods]]
+name = "Carpet TCTC Addition"
+slug = "carpet-tctc-addition"
+entrypoint = "top.catowncraft.carpettctcaddition.CarpetTCTCAddition"
+settings_manager = "top.catowncraft.carpettctcaddition.CarpetTCTCAdditionExtension.settingsManager"
+settings_manager_class = "top.catowncraft.carpettctcaddition.rule.CarpetTCTCAdditionSettingManager"
+rule_annotation_class = "top.hendrixshen.magiclib.carpet.api.annotation.Rule"
+settings_classes = ["top.catowncraft.carpettctcaddition.CarpetTCTCAdditionSettings"]
+# we use the magiclib dep from CurseForge as it is easier to specify non-primary files there compared to Modrinth
+
+# the non-legacy 1.14 versions are all broken due to an invalid mixin annotation
+# we instead use an older version that didn't have that mixin yet
+# [mods.versions."1.14"]
+# minecraft_version = "1.14.4"
+# printer_version = "magiclib-v1"
+# dependencies = ["maven.modrinth:carpet:1.3.7", "curse.maven:magiclib-576459:4679993"]
+# source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.14.4-2.2.201+8009659-stable.jar" }
+[mods.versions."1.14"]
+minecraft_version = "1.14.4"
+printer_version = "v1"
+entrypoint = "top.catowncraft.CarpetTCTCAddition.CarpetTCTCAddition"
+settings_manager = ""
+settings_manager_class = ""
+rule_annotation_class = ""
+settings_classes = ["top.catowncraft.CarpetTCTCAddition.CarpetTCTCAdditionSettings"]
+dependencies = ["maven.modrinth:carpet:1.3.7"]
+source = { host = "Modrinth", version = "Carpet-TCTC-Addition-fabric-mc1.14-1.1.8+416e97d" }
+
+[mods.versions."1.15"]
+minecraft_version = "1.15.2"
+printer_version = "magiclib-v1"
+dependencies = ["maven.modrinth:carpet:1.4.8", "curse.maven:magiclib-576459:4679994"]
+source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.15.2-2.2.201+8009659-stable.jar" }
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "magiclib-v1"
+dependencies = ["maven.modrinth:carpet:1.4.44", "curse.maven:magiclib-576459:4679995"]
+source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.16.5-2.2.201+8009659-stable.jar" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "magiclib-v1"
+dependencies = ["maven.modrinth:carpet:1.4.57", "curse.maven:magiclib-576459:4679996"]
+source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.17.1-2.2.201+8009659-stable.jar" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "magiclib-v1"
+dependencies = ["maven.modrinth:carpet:1.4.69", "curse.maven:magiclib-576459:4679997"]
+source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.18.2-2.2.201+8009659-stable.jar" }
+
+# TODO: get these to work
+# [mods.versions."1.19"]
+# minecraft_version = "1.19.4"
+# printer_version = "magiclib-v1"
+# dependencies = ["maven.modrinth:carpet:1.4.101", "curse.maven:magiclib-576459:4680000"]
+# source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.19.4-2.2.201+8009659-stable.jar" }
+#
+# [mods.versions."1.20"]
+# minecraft_version = "1.20.1"
+# printer_version = "magiclib-v1"
+# dependencies = ["maven.modrinth:carpet:1.4.112", "curse.maven:magiclib-576459:4680001"]
+# source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.20.1-2.2.201+8009659-stable.jar" }
+
+[[mods]]
+name = "Chronos Carpet Addons"
+slug = "chronos-carpet-addons"
+repo = "ChronosServer/chronos-carpet-addons"
+entrypoint = "chronos.ChronosExtension"
+settings_classes = ["chronos.ChronosSettings"]
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "GitHub", tag = "release", asset = "chronos-carpet-extension-1.17.1-1.4.6.jar" }
+
+[[mods]]
+name = "Epsilon Carpet"
+slug = "epsilon-carpet"
+repo = "EpsilonSMP/Epsilon-Carpet"
+# we must make sure the static code in that class is loaded
+# TODO: why is this only needed here?
+entrypoint = "world.epsilonsmp.EpsilonCarpet.EpsilonCarpetExtension::noop"
+settings_classes = ["world.epsilonsmp.EpsilonCarpet.EpsilonCarpetSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "v2021.5.2", asset = "epsilon-carpet-1.16.5-2021.5.2.jar" }
+
+# TODO: why does this not run?
+# [[mods]]
+# name = "Fractal Carpet Addon"
+# slug = "fractal-carpet-addon"
+# repo = "FracturedCode/FractalCarpetAddon"
+# settings_classes = ["com.fractalsmp.fractal_carpet_addon.FractalSimpleSettings"]
+#
+# [mods.versions."1.15"]
+# minecraft_version = "1.15.2"
+# printer_version = "v1"
+# dependencies = ["maven.modrinth:carpet:1.4.8"]
+# source = { host = "GitHub", tag = "v1.0", asset = "fractal-carpet-addon-1.15.2-v1.0.jar" }
+
+[[mods]]
+name = "EssentialAddons"
+slug = "essentialaddons"
+entrypoint = "essentialaddons.EssentialAddons"
+settings_classes = ["essentialaddons.EssentialSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+entrypoint = "essentialaddons.EssentialAddonsServer"
+settings_classes = ["essentialaddons.EssentialAddonsSettings"]
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "Modrinth", version = "v1.0.6" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "Modrinth", version = "1.2.1" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "Modrinth", version = "f2AeWoGj" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "Modrinth", version = "srCjbSnV" }
+
+[mods.versions."1.20"]
+minecraft_version = "1.20.1"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.112"]
+source = { host = "Modrinth", version = "XpKnOCjz" }
+
+[[mods]]
+name = "Hosting-luisch Carpet"
+slug = "hostingluisch"
+repo = "luisch444/Hosting-luisch-Carpet"
+entrypoint = "xyz.luisch444.carpet.HostingluischServer"
+settings_classes = ["xyz.luisch444.carpet.HostingluischSettings"]
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "GitHub", tag = "1.0.0", asset = "Hosting-luisch.Carpet-1.0.0.1.17.jar" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "GitHub", tag = "1.0.0", asset = "Hosting-luisch.Carpet-1.0.0.1.18.jar" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "GitHub", tag = "1.1.0", asset = "Hosting-luisch.Carpet-1.1.0-1.19.4.jar" }
+
+[mods.versions."1.20"]
+minecraft_version = "1.20.1"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.112"]
+source = { host = "GitHub", tag = "1.1.0", asset = "Hosting-luisch.Carpet-1.1.0-1.20.jar" }
+
+[[mods]]
+name = "Intricarpet"
+slug = "intricarpet"
+repo = "lntricate1/intricarpet"
+entrypoint = "me.lntricate.intricarpet.IntricarpetMod"
+settings_classes = ["me.lntricate.intricarpet.Rules"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+entrypoint = "intricarpet.intricarpetExtension"
+settings_classes = ["intricarpet.intricarpetRules"]
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "1.0.33", asset = "intricarpet-1.16.5-1.0.33.jar" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57", "com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.8"]
+source = { host = "Modrinth", version = "JZpMybSr" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69", "com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.8"]
+source = { host = "Modrinth", version = "8QvwyQh0" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v2"
+dependencies = ["maven.modrinth:carpet:1.4.101", "com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.8"]
+source = { host = "Modrinth", version = "OD9kowjP" }
+
+[[mods]]
+name = "Jank Addons"
+slug = "jankaddons"
+entrypoint = "jankaddons.JankAddons"
+settings_classes = ["jankaddons.JankAddonsSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "Modrinth", version = "1.16.5-1.0.4" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "Modrinth", version = "1.17.1-1.0.4" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "Modrinth", version = "1.1.1" }
+
+[[mods]]
+name = "LiteTech Additions"
+slug = "litetech-additions"
+repo = "LiteTechMC/litetech-additions"
+entrypoint = "cf.litetech.additions.carpet.CarpetAddons::register"
+settings_classes = ["cf.litetech.additions.carpet.CarpetAddonsSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "1.0.0", asset = "litetech-additions-1.0.0.jar" }
+
+[[mods]]
+name = "MoistCraft Carpet Addons"
+slug = "moistcraft-carpet-addons"
+repo = "CSClub05/moistcraft-carpet-addons"
+entrypoint = "moistcraft.MoistcraftExtension"
+settings_classes = ["moistcraft.MoistcraftSettings"]
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "GitHub", tag = "release", asset = "moistcraft-carpet-extension-1.17.1-1.0.0.jar" }
+
+[[mods]]
+name = "Plusls Carpet Addition"
+slug = "pca"
+repo = "plusls/plusls-carpet-addition"
+entrypoint = "com.plusls.carpet.PcaMod"
+settings_classes = ["com.plusls.carpet.PcaSettings"]
+
+[mods.versions."1.14"]
+minecraft_version = "1.14.4"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.3.7"]
+source = { host = "GitHub", tag = "0.2.5-1.18.x", asset = "plusls-carpet-addition-1.14.4-0.2.5.jar" }
+
+[mods.versions."1.15"]
+minecraft_version = "1.15.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.8"]
+source = { host = "GitHub", tag = "0.2.5-1.18.x", asset = "plusls-carpet-addition-1.15.2-0.2.5.jar" }
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "0.2.5-1.18.x", asset = "plusls-carpet-addition-1.16.5-0.2.5.jar" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "GitHub", tag = "0.2.5-1.18.x", asset = "plusls-carpet-addition-1.17.1-0.2.5.jar" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "GitHub", tag = "0.2.5-1.18.x", asset = "plusls-carpet-addition-1.18.2-0.2.5.jar" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.79"]
+source = { host = "GitHub", tag = "0.2.5-1.18.x", asset = "plusls-carpet-addition-1.19-0.2.5-alpha+1703874.jar" }
