@@ -1,0 +1,1 @@
+{"hash":5506327169051393244,"rules":[{"name":"commandInteraction","description":"Enables /interaction command for controlling the effects of players on the environment","type":"String","value":"ops","strict":true,"categories":["COMMAND","INTRICARPET"],"options":["true","false","ops"],"extras":[],"validators":[],"config_files":["carpet"]}]}

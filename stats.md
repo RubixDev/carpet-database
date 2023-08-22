@@ -1,13 +1,29 @@
-**Rules parsed**: 771
+**Rules parsed**: 1096
 
 - **Carpet-Fixes**: 308
 - **Carpet**: 104
 - **Rug**: 104
+- **Carpet RedCraft Addons**: 85
+- **EssentialAddons**: 64
 - **Carpet Extra**: 57
 - **Minitweaks**: 46
 - **Carpet Gamerules**: 45
 - **XpBeacons**: 43
 - **Carpet Sky Additions**: 38
+- **Carpet TCTC Addition**: 30
+- **Plusls Carpet Addition**: 30
+- **Epsilon Carpet**: 25
+- **Anvil Crush**: 16
+- **Carpet DRC Addition**: 16
 - **Carpet Lunaar Addons**: 16
+- **Hosting-luisch Carpet**: 12
+- **Carpet Shadow**: 10
 - **Carpet Addons**: 9
+- **LiteTech Additions**: 8
+- **Jank Addons**: 7
+- **Bastion Carpet**: 6
+- **Intricarpet**: 6
+- **Chronos Carpet Addons**: 5
+- **Fractal Carpet Addon**: 3
+- **MoistCraft Carpet Addons**: 2
 - **Carpet AutoCraftingTable**: 1

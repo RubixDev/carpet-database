@@ -1,1 +1,1 @@
-{"hash":1008537905807475152,"rules":[{"name":"autoCraftingTable","description":"Auto-crafting table","type":"boolean","value":"false","strict":true,"categories":["CREATIVE","EXTRAS"],"options":["true","false"],"extras":[],"validators":[],"config_files":["carpet"]}]}
+{"hash":9681249519142583927,"rules":[{"name":"autoCraftingTable","description":"Auto-crafting table","type":"boolean","value":"false","strict":true,"categories":["CREATIVE","EXTRAS"],"options":["true","false"],"extras":[],"validators":[],"config_files":["carpet"]}]}
