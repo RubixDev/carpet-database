@@ -67,9 +67,13 @@ pub struct Mod {
     pub entrypoint: Option<String>,
     pub settings_manager: Option<String>,
     pub settings_manager_class: Option<String>,
+    pub rule_annotation_class: Option<String>,
     pub settings_classes: Option<Vec<String>>,
     #[serde(default)]
     pub run_client: bool,
+    // dependencies that are common across all versions
+    #[serde(default)]
+    pub common_dependencies: Vec<String>,
     pub versions: BTreeMap<MinecraftMajorVersion, ModVersion>,
 }
 
@@ -80,6 +84,7 @@ pub struct ModVersion {
     pub entrypoint: Option<String>,
     pub settings_manager: Option<String>,
     pub settings_manager_class: Option<String>,
+    pub rule_annotation_class: Option<String>,
     pub settings_classes: Option<Vec<String>>,
     pub run_client: Option<bool>,
     /// dependencies other than Fabric API

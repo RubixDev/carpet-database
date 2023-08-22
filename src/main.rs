@@ -172,8 +172,10 @@ async fn run_mod(
         entrypoint: default_entrypoint,
         settings_manager: default_settings_manager,
         settings_manager_class: default_settings_manager_class,
+        rule_annotation_class: default_rule_annotation_class,
         settings_classes: default_settings_classes,
         run_client: default_run_client,
+        common_dependencies,
         versions,
     }: &Mod,
     outputs: &mut Vec<Output>,
@@ -203,6 +205,7 @@ async fn run_mod(
             entrypoint,
             settings_manager,
             settings_manager_class,
+            rule_annotation_class,
             settings_classes,
             run_client,
             dependencies,
@@ -231,11 +234,24 @@ async fn run_mod(
                     "top.hendrixshen.magiclib.carpet.impl.WrappedSettingManager"
                 }
             });
+        let rule_annotation_class = rule_annotation_class
+            .as_ref()
+            .or(default_rule_annotation_class.as_ref())
+            .filter(|s| !s.is_empty())
+            .map(|s| s.as_str())
+            .unwrap_or(match printer_version {
+                PrinterVersion::V1 | PrinterVersion::V2 => "carpet.settings.Rule",
+                PrinterVersion::V3 => "carpet.api.settings.Rule",
+                PrinterVersion::MagicLibV1 | PrinterVersion::MagicLibV2 => {
+                    "top.hendrixshen.magiclib.carpet.api.annotation.Rule"
+                }
+            });
         let settings_classes = settings_classes
             .as_ref()
             .or(default_settings_classes.as_ref())
             .with_context(|| "no settings classes specified")?;
         let run_client = run_client.unwrap_or(*default_run_client);
+        let dependencies = common_dependencies.iter().chain(dependencies).collect_vec();
 
         let version_url = match source {
             VersionSource::Modrinth { version, .. } => {
@@ -260,9 +276,10 @@ async fn run_mod(
             entrypoint,
             settings_manager,
             settings_manager_class,
+            rule_annotation_class,
             settings_classes,
             run_client,
-            dependencies,
+            &dependencies,
             source,
         ));
         if let Some(output) = sh
@@ -361,6 +378,7 @@ public interface PrivateSettingsManagerAccessor {{
                     .collect_vec()
                     .join(", "),
             )
+            .replace("RULE", rule_annotation_class)
             .replace(
                 "SETTINGS_CLASSES",
                 &settings_classes

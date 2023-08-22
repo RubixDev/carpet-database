@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import net.minecraft.text.Text;
 import org.apache.commons.lang3.ClassUtils;
-import top.hendrixshen.magiclib.carpet.api.annotation.Rule;
 import top.hendrixshen.magiclib.carpet.impl.WrappedSettingManager;
 
 public class Printer {
@@ -25,7 +24,7 @@ public class Printer {
         List<String> ruleNames = new ArrayList<>();
         for (Class<?> clazz : new Class<?>[] {SETTINGS_CLASSES}) {
             for (Field field : clazz.getDeclaredFields()) {
-                if (field.getAnnotation(Rule.class) == null) continue;
+                if (field.getAnnotation(RULE.class) == null) continue;
                 ruleNames.add(field.getName());
             }
         }

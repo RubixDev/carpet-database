@@ -18,7 +18,7 @@ public class Printer {
         List<String> ruleNames = new ArrayList<>();
         for (Class<?> clazz : new Class<?>[] {SETTINGS_CLASSES}) {
             for (Field field : clazz.getDeclaredFields()) {
-                if (field.getAnnotation(Rule.class) == null) continue;
+                if (field.getAnnotation(RULE.class) == null) continue;
                 ruleNames.add(field.getName());
             }
         }

@@ -936,23 +936,24 @@ name = "SubTick"
 slug = "subtick"
 entrypoint = "subtick.SubTick"
 settings_classes = ["subtick.Settings"]
+common_dependencies = ["com.github.LlamaLad7:MixinExtras:0.1.1"]
 
 [mods.versions."1.17"]
 minecraft_version = "1.17.1"
 printer_version = "v1"
-dependencies = ["maven.modrinth:carpet:1.4.57", "com.github.LlamaLad7:MixinExtras:0.1.1"]
+dependencies = ["maven.modrinth:carpet:1.4.57"]
 source = { host = "Modrinth", version = "HxyAW5iC" }
 
 [mods.versions."1.18"]
 minecraft_version = "1.18.2"
 printer_version = "v1"
-dependencies = ["maven.modrinth:carpet:1.4.69", "com.github.LlamaLad7:MixinExtras:0.1.1"]
+dependencies = ["maven.modrinth:carpet:1.4.69"]
 source = { host = "Modrinth", version = "w25YYdKm" }
 
 [mods.versions."1.19"]
 minecraft_version = "1.19.4"
 printer_version = "v2"
-dependencies = ["maven.modrinth:carpet:1.4.101", "com.github.LlamaLad7:MixinExtras:0.1.1"]
+dependencies = ["maven.modrinth:carpet:1.4.101"]
 source = { host = "Modrinth", version = "LQ33Md41" }
 
 [[mods]]
@@ -1082,3 +1083,97 @@ minecraft_version = "1.18.2"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.69"]
 source = { host = "GitHub", tag = "0.1.0", asset = "ceramic-1.18-0.1.0.jar" }
+
+[[mods]]
+name = "Carpet TIS Addition"
+slug = "carpet-tis-addition"
+entrypoint = "carpettisaddition.CarpetTISAdditionMod"
+rule_annotation_class = "carpettisaddition.settings.Rule"
+settings_classes = ["carpettisaddition.CarpetTISAdditionSettings"]
+common_dependencies = ["com.github.Fallen-Breath:conditional-mixin:v0.3.2", "com.github.LlamaLad7:MixinExtras:0.1.1"]
+
+[mods.versions."1.14"]
+minecraft_version = "1.14.4"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.3.7"]
+source = { host = "Modrinth", version = "28wvy6Pk" }
+
+[mods.versions."1.15"]
+minecraft_version = "1.15.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.8"]
+source = { host = "Modrinth", version = "Ja6Qwe1Y" }
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "Modrinth", version = "JKKRk2Kd" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "Modrinth", version = "BggWDexf" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "Modrinth", version = "gKWNPaE8" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "Modrinth", version = "vo99aJvd" }
+
+[mods.versions."1.20"]
+minecraft_version = "1.20.1"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.112"]
+source = { host = "Modrinth", version = "cbQ4ETEb" }
+
+[[mods]]
+name = "Ivan Carpet Addition"
+slug = "ivan-carpet-addition"
+entrypoint = "me.ivan.ivancarpetaddition.IvanCarpetAdditionMod"
+rule_annotation_class = "me.ivan.ivancarpetaddition.settings.Rule"
+settings_classes = ["me.ivan.ivancarpetaddition.IvanCarpetAdditionSettings"]
+common_dependencies = ["com.github.Fallen-Breath:conditional-mixin:v0.3.2", "org.yaml:snakeyaml:1.29"]
+
+[mods.versions."1.14"]
+minecraft_version = "1.14.4"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.3.7"]
+source = { host = "Modrinth", version = "agYZbZcE" }
+
+[mods.versions."1.15"]
+minecraft_version = "1.15.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.8"]
+source = { host = "Modrinth", version = "QDAlmQtt" }
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "Modrinth", version = "r3lIDc99" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "Modrinth", version = "vqpa6pRV" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "Modrinth", version = "uzeH0742" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "Modrinth", version = "AN7uhubT" }

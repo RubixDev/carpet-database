@@ -88,6 +88,9 @@ settings_manager = ""
 # (Optional) A mod-global default for the settings manager class.
 # Should be up-to-date with the latest version.
 settings_manager_class = ""
+# (Optional) A mod-global default for the rule annotation class.
+# Should be up-to-date with the latest version.
+rule_annotation_class = ""
 # (Optional) A mod-global default for the settings classes.
 # Should be up-to-date with the latest version.
 settings_classes = [""]
@@ -95,6 +98,11 @@ settings_classes = [""]
 # Should be up-to-date with the latest version.
 # Defaults to `false`.
 run_client = false
+# (Optional) Dependencies that are the same for all versions.
+# Usually used for libraries like MixinExtras or conditional-mixin.
+# Cannot be overwritten per version.
+# See the version-specific dependencies for more information.
+common_dependencies = []
 
 # You can define one version for every major Minecraft version.
 # See the latest one for more information on the available settings.
@@ -176,6 +184,11 @@ settings_manager = ""
 # If the mod uses a custom type for the settings manager, set it here.
 # This is mainly for users of MagicLib, like TCTC.
 settings_manager_class = ""
+# (Optional) A version-specific override for the rule annotation class.
+# Use `""` to unset the mod default.
+# This is the class of the `@Rule` annotations used in the settings classes.
+# Do not set this unless the mod define its own annotation.
+rule_annotation_class = ""
 # (Optional) A version-specific override for the settings classes.
 # A value must be set either here or for the entire mod.
 # This specifies the list of classes that define carpet rules.
