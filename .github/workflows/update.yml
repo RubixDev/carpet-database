@@ -35,11 +35,15 @@ jobs:
         with:
           command: run
 
+      # changes should still be committed, even if there was a failure,
+      # but not if the workflow was manually cancelled
       - name: Capture date
         id: capture-date
+        if: '!cancelled()'
         run: echo "date=$(date -u)" >> "$GITHUB_OUTPUT"
 
       - name: Commit changes
+        if: '!cancelled()'
         uses: EndBug/add-and-commit@v9
         with:
           add: data stats.md

@@ -173,6 +173,7 @@ async fn run_mod(
         settings_manager: default_settings_manager,
         settings_manager_class: default_settings_manager_class,
         settings_classes: default_settings_classes,
+        run_client: default_run_client,
         versions,
     }: &Mod,
     outputs: &mut Vec<Output>,
@@ -203,6 +204,7 @@ async fn run_mod(
             settings_manager,
             settings_manager_class,
             settings_classes,
+            run_client,
             dependencies,
             source,
         },
@@ -233,6 +235,8 @@ async fn run_mod(
             .as_ref()
             .or(default_settings_classes.as_ref())
             .with_context(|| "no settings classes specified")?;
+        let run_client = run_client.unwrap_or(*default_run_client);
+
         let version_url = match source {
             VersionSource::Modrinth { version, .. } => {
                 format!("https://modrinth.com/mod/{slug}/version/{version}")
@@ -257,6 +261,7 @@ async fn run_mod(
             settings_manager,
             settings_manager_class,
             settings_classes,
+            run_client,
             dependencies,
             source,
         ));
@@ -452,7 +457,7 @@ dependencies {{
         let is_terminal = std::io::stdout().lock().is_terminal();
         let mut stdout_log = vec![];
         let mut cmd = Command::new(ACTIVE_DIR.join("gradlew"))
-            .arg("runClient")
+            .arg(if run_client { "runClient" } else { "runServer" })
             .current_dir(&*ACTIVE_DIR)
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
