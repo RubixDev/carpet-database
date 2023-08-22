@@ -725,25 +725,61 @@ fn combine(sh: &Shell, outputs: Vec<Output>) -> Result<()> {
     )?;
 
     // get and print stats
-    let mut mod_counts: BTreeMap<String, HashSet<String>> = BTreeMap::new();
+    let mut count_by_mod: BTreeMap<String, HashSet<String>> = BTreeMap::new();
+    let mut count_by_version: BTreeMap<MinecraftMajorVersion, HashSet<String>> = BTreeMap::new();
+    let mut count_by_category: BTreeMap<String, HashSet<String>> = BTreeMap::new();
     for rule in &combined {
-        mod_counts
+        count_by_mod
             .entry(rule.mod_name.clone())
             .or_default()
             .insert(rule.name.clone());
+        for version in &rule.minecraft_versions {
+            count_by_version
+                .entry(*version)
+                .or_default()
+                .insert(rule.name.clone());
+        }
+        for category in &rule.categories {
+            count_by_category
+                .entry(category.clone())
+                .or_default()
+                .insert(rule.name.clone());
+        }
     }
-    let mut mod_counts = mod_counts
+    let mut count_by_mod = count_by_mod
         .into_iter()
         .map(|(name, set)| (name, set.len()))
         .collect_vec();
-    mod_counts.sort_by(|a, b| b.1.cmp(&a.1));
-    let total_count: usize = mod_counts.iter().map(|(_, count)| count).sum();
+    count_by_mod.sort_by(|a, b| b.1.cmp(&a.1));
+    let mut count_by_version = count_by_version
+        .into_iter()
+        .map(|(name, set)| (name, set.len()))
+        .collect_vec();
+    count_by_version.sort_by(|a, b| b.1.cmp(&a.1));
+    let mut count_by_category = count_by_category
+        .into_iter()
+        .map(|(name, set)| (name, set.len()))
+        .collect_vec();
+    count_by_category.sort_by(|a, b| b.1.cmp(&a.1));
+    let total_count: usize = count_by_mod.iter().map(|(_, count)| count).sum();
 
     println!("\x1b[1;32m>>> Rules parsed: {total_count}\x1b[0m");
+    println!("\x1b[32m>> Count per mod:\x1b[0m");
     let mut stats_md = format!("**Rules parsed**: {total_count}\n\n");
-    for (mod_name, count) in &mod_counts {
-        println!("\x1b[32m>> {mod_name}: {count}\x1b[0m");
+    stats_md += "Count per mod:\n\n";
+    for (mod_name, count) in &count_by_mod {
+        println!("\x1b[32m> {mod_name}: {count}\x1b[0m");
         stats_md += &format!("- **{mod_name}**: {count}\n");
+    }
+    println!("\x1b[32m>> Count per version:\x1b[0m");
+    stats_md += "\nCount per version:\n\n";
+    for (version, count) in &count_by_version {
+        println!("\x1b[32m> {version}: {count}\x1b[0m");
+        stats_md += &format!("- **{version}**: {count}\n");
+    }
+    stats_md += "\nCount per category:\n\n";
+    for (category, count) in &count_by_category {
+        stats_md += &format!("- `{category}`: {count}\n");
     }
     sh.write_file(WORKSPACE_DIR.join("stats.md"), stats_md)?;
 
