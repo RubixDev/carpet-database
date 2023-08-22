@@ -1,6 +1,7 @@
 use std::{
     collections::{hash_map::DefaultHasher, BTreeMap, BTreeSet, HashSet},
-    fs::{self},
+    env,
+    fs::{self, File},
     hash::{Hash, Hasher},
     io::{IsTerminal, Write},
     path::{Path, PathBuf},
@@ -61,23 +62,55 @@ async fn try_main() -> Result<()> {
     // make sure the shell's pwd is always the same
     sh.change_dir(&*WORKSPACE_DIR);
 
+    let arg = env::args().nth(1);
+    let arg = arg.as_ref();
+
     let ModsToml { mods } = toml::from_str(include_str!("../mods.toml"))?;
 
-    let used_mc_versions = mods
-        .iter()
-        .flat_map(|mod_| mod_.versions.values())
-        .map(|ver| ver.minecraft_version.to_string())
-        .collect::<BTreeSet<_>>();
-    gen_template_mods(&sh, used_mc_versions)?;
+    if arg.map_or(false, |s| s == "get-matrix") {
+        let entries = mods
+            .iter()
+            .map(|mod_| json!({ "slug": mod_.slug }))
+            .collect_vec();
+        let matrix = json!({ "include": entries });
+        let mut file = File::options()
+            .append(true)
+            .open(env::var("GITHUB_OUTPUT")?)?;
+        file.write_all(format!("mod-list={}", serde_json::to_string(&matrix)?).as_bytes())?;
+        return Ok(());
+    }
+
+    if arg.map_or(true, |s| s != "combine") {
+        let used_mc_versions = mods
+            .iter()
+            .flat_map(|mod_| mod_.versions.values())
+            .map(|ver| ver.minecraft_version.to_string())
+            .collect::<BTreeSet<_>>();
+        gen_template_mods(&sh, used_mc_versions)?;
+    }
 
     let mut outputs: Vec<Output> = vec![];
     for mod_ in &mods {
-        run_mod(&sh, mod_, &mut outputs).await.with_context(|| {
-            format!("\x1b[1;31mfailed to extract data for mod `{mod_:#?}`\x1b[0m")
-        })?;
+        if arg
+            .and_then(|s| s.strip_prefix("mod:"))
+            .map_or(true, |slug| slug == mod_.slug)
+        {
+            run_mod(
+                &sh,
+                mod_,
+                &mut outputs,
+                arg.map_or(false, |s| s == "combine"),
+            )
+            .await
+            .with_context(|| {
+                format!("\x1b[1;31mfailed to extract data for mod `{mod_:#?}`\x1b[0m")
+            })?;
+        }
     }
 
-    combine(&sh, outputs)?;
+    if arg.map_or(true, |s| s == "combine") {
+        combine(&sh, outputs)?;
+    }
 
     Ok(())
 }
@@ -179,6 +212,7 @@ async fn run_mod(
         versions,
     }: &Mod,
     outputs: &mut Vec<Output>,
+    combine_only: bool,
 ) -> Result<()> {
     println!(
         "\x1b[1;32m{0}\n>>> getting rules for '{name}' <<<\n{0}\x1b[0m",
@@ -299,6 +333,10 @@ async fn run_mod(
                 });
                 continue;
             }
+        }
+
+        if combine_only {
+            bail!("cannot run combine task with outdated data");
         }
 
         // remove any previous active mod

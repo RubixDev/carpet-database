@@ -2,11 +2,35 @@ name: Update database
 on:
   push:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 0 * * 0'
+permissions:
+  contents: write
 jobs:
-  run-and-push:
+  get-matrix:
     runs-on: ubuntu-latest
+    outputs:
+      mod-list: ${{ steps.get-matrix.outputs.mod-list }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Restore Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: Get Job Matrix
+        id: get-matrix
+        run: cargo run get-matrix
+
+  run-mods:
+    name: Get data for ${{ matrix.slug }}
+    runs-on: ubuntu-latest
+    needs: get-matrix
+    strategy:
+      matrix: ${{ fromJson(needs.get-matrix.outputs.mod-list) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -23,30 +47,60 @@ jobs:
           deno-version: v1.x
 
       - name: Install Rust Toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Restore Rust Cache
         uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
 
       - name: Run
-        uses: actions-rs/cargo@v1
-        with:
-          command: run
+        run: |
+          cargo run mod:${{ matrix.slug }}
 
-      # changes should still be committed, even if there was a failure,
-      # but not if the workflow was manually cancelled
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: data-${{ matrix.slug }}
+          path: data/${{ matrix.slug }}-1.*.json
+          retention-days: 1
+
+  combine:
+    runs-on: ubuntu-latest
+    needs: run-mods
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Restore Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: Download data
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+
+      - name: Combine Data
+        run: |
+          rm -r data
+          mkdir data
+          cp artifacts/*/* data/
+          cargo run combine
+
       - name: Capture date
         id: capture-date
-        if: '!cancelled()'
         run: echo "date=$(date -u)" >> "$GITHUB_OUTPUT"
 
       - name: Commit changes
-        if: '!cancelled()'
         uses: EndBug/add-and-commit@v9
         with:
           add: data stats.md
           committer_name: github-actions[bot]
           committer_email: 41898282+github-actions[bot]@users.noreply.github.com
           message: "Update database '${{ steps.capture-date.outputs.date }}'"
+          pull: '--rebase --autostash'
