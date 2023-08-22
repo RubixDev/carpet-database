@@ -1,8 +1,9 @@
-**Rules parsed**: 1223
+**Rules parsed**: 1355
 
 - **Carpet-Fixes**: 308
 - **Carpet**: 104
 - **Rug**: 104
+- **Carpet TIS Addition**: 98
 - **Carpet RedCraft Addons**: 85
 - **EssentialAddons**: 64
 - **Carpet Extra**: 57
@@ -12,6 +13,7 @@
 - **XpBeacons**: 43
 - **Johan Carpet Addon**: 41
 - **Carpet Sky Additions**: 38
+- **Ivan Carpet Addition**: 34
 - **Carpet TCTC Addition**: 30
 - **Plusls Carpet Addition**: 30
 - **Epsilon Carpet**: 25
