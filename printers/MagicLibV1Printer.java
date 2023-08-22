@@ -32,7 +32,6 @@ public class Printer {
         WrappedSettingManager settingsManager = mixin.PrivateSettingsManagerAccessor.getSettingsManager();
         for (String ruleName : ruleNames) {
             ParsedRule<?> rule = settingsManager.getRule(ruleName);
-            JsonArray configFiles = new JsonArray();
             if (rule == null) {
                 System.err.println("Warning: rule '" + ruleName + "' could not be found in any SettingsManager");
                 continue;
@@ -61,6 +60,8 @@ public class Printer {
                             .map(Validator::description)
                             .filter(Objects::nonNull)
                             .collect(Collectors.toList())));
+            JsonArray configFiles = new JsonArray();
+            configFiles.add(settingsManager.getIdentifier());
             obj.add("config_files", configFiles);
             rules.add(obj);
         }
