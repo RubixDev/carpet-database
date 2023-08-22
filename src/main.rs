@@ -227,7 +227,7 @@ async fn run_mod(
             .unwrap_or(match printer_version {
                 PrinterVersion::V1 | PrinterVersion::V2 => "carpet.settings.SettingsManager",
                 PrinterVersion::V3 => "carpet.api.settings.SettingsManager",
-                PrinterVersion::MagicLibV1 => {
+                PrinterVersion::MagicLibV1 | PrinterVersion::MagicLibV2 => {
                     "top.hendrixshen.magiclib.carpet.impl.WrappedSettingManager"
                 }
             });
@@ -322,6 +322,7 @@ async fn run_mod(
             PrinterVersion::V2 => include_str!("../printers/V2Printer.java"),
             PrinterVersion::V3 => include_str!("../printers/V3Printer.java"),
             PrinterVersion::MagicLibV1 => include_str!("../printers/MagicLibV1Printer.java"),
+            PrinterVersion::MagicLibV2 => include_str!("../printers/MagicLibV2Printer.java"),
         };
         if let Some(settings_manager) = settings_manager {
             let (class_path, field_name) = settings_manager

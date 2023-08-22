@@ -662,18 +662,17 @@ printer_version = "magiclib-v1"
 dependencies = ["maven.modrinth:carpet:1.4.69", "curse.maven:magiclib-576459:4679997"]
 source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.18.2-2.2.201+8009659-stable.jar" }
 
-# TODO: get these to work
-# [mods.versions."1.19"]
-# minecraft_version = "1.19.4"
-# printer_version = "magiclib-v1"
-# dependencies = ["maven.modrinth:carpet:1.4.101", "curse.maven:magiclib-576459:4680000"]
-# source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.19.4-2.2.201+8009659-stable.jar" }
-#
-# [mods.versions."1.20"]
-# minecraft_version = "1.20.1"
-# printer_version = "magiclib-v1"
-# dependencies = ["maven.modrinth:carpet:1.4.112", "curse.maven:magiclib-576459:4680001"]
-# source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.20.1-2.2.201+8009659-stable.jar" }
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "magiclib-v2"
+dependencies = ["maven.modrinth:carpet:1.4.101", "curse.maven:magiclib-576459:4680000"]
+source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.19.4-2.2.201+8009659-stable.jar" }
+
+[mods.versions."1.20"]
+minecraft_version = "1.20.1"
+printer_version = "magiclib-v2"
+dependencies = ["maven.modrinth:carpet:1.4.112", "curse.maven:magiclib-576459:4680001"]
+source = { host = "Modrinth", version = "2.2.201+8009659", filename = "CarpetTCTCAddition-1.20.1-2.2.201+8009659-stable.jar" }
 
 [[mods]]
 name = "Chronos Carpet Addons"

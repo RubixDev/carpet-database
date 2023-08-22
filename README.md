@@ -151,11 +151,15 @@ source = { host = "Modrinth", version = "" }
 # The exact Minecraft to use. This should be the latest for this major MC
 # version that the mod supports.
 minecraft_version = "1.20.1"
-# The printer version. Available printers are `v1`, `v2`, `v3`, and `magiclib-v1`.
+# The printer version. Available printers are `v1`, `v2`, `v3`,
+# `magiclib-v1`, and `magiclib-v2.
 # Usually, `v1` is used for pre-1.19 mods and `v3` for >=1.19.
 # `v2` is for scenarios where the Carpet version already uses the new
 # settings manager API, but the mod still uses the old one.
-# `magiclib-v1` is for mods that use the `WrappedSettingManager` type from MagicLib.
+# `magiclib-v1` is the `v1` equivalent for mods that use the
+# `WrappedSettingManager` type from MagicLib.
+# `magiclib-v2` is the `v3` equivalent for mods that use the
+# `WrappedSettingManager` type from MagicLib.
 printer_version = "v3"
 # (Optional) A version-specific override for the entrypoint.
 # Use `""` to unset the mod default.

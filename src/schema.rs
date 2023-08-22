@@ -114,6 +114,9 @@ pub enum PrinterVersion {
     #[serde(rename = "magiclib-v1")]
     #[strum(serialize = "magiclib-v1")]
     MagicLibV1,
+    #[serde(rename = "magiclib-v2")]
+    #[strum(serialize = "magiclib-v2")]
+    MagicLibV2,
 }
 
 macro_rules! mc_version_enum {
