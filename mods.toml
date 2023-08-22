@@ -911,3 +911,174 @@ minecraft_version = "1.19"
 printer_version = "v1"
 dependencies = ["maven.modrinth:carpet:1.4.79"]
 source = { host = "GitHub", tag = "0.2.5-1.18.x", asset = "plusls-carpet-addition-1.19-0.2.5-alpha+1703874.jar" }
+
+[[mods]]
+name = "SubTick (chiraagChakravarthy)"
+slug = "subtick-chiraagchakravarthy"
+repo = "chiraagChakravarthy/SubTick"
+entrypoint = "subtick.SubTick"
+settings_classes = ["subtick.SubTickSettings"]
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "GitHub", tag = "v1.4.0", asset = "subtick-1.17.1-1.4.0.jar" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "GitHub", tag = "v2.0", asset = "subtick-1.18.2-2.0.jar" }
+
+[[mods]]
+name = "SubTick"
+slug = "subtick"
+entrypoint = "subtick.SubTick"
+settings_classes = ["subtick.Settings"]
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57", "com.github.LlamaLad7:MixinExtras:0.1.1"]
+source = { host = "Modrinth", version = "HxyAW5iC" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69", "com.github.LlamaLad7:MixinExtras:0.1.1"]
+source = { host = "Modrinth", version = "w25YYdKm" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v2"
+dependencies = ["maven.modrinth:carpet:1.4.101", "com.github.LlamaLad7:MixinExtras:0.1.1"]
+source = { host = "Modrinth", version = "LQ33Md41" }
+
+[[mods]]
+name = "Swaggy Carpet Addon"
+slug = "swaggycarpet"
+repo = "enjarai/swaggy-carpet-addon"
+settings_classes = ["nl.enjarai.swaggycarpet.SwaggySettings"]
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "GitHub", tag = "1.0.0", asset = "swaggy-carpet-addon-1.0.0.jar" }
+
+[[mods]]
+name = "Toto's Carpet Tweaks"
+slug = "totos-carpet-tweaks"
+project_id = 633476
+entrypoint = "totoscarpettweaks.TotoCarpetMod"
+settings_classes = ["totoscarpettweaks.TotoCarpetSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "CurseForge", file_id = 3831722 }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "CurseForge", file_id = 3831724 }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "Modrinth", version = "QCKCeCqb" }
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "Modrinth", version = "mwSvEw5D" }
+
+[mods.versions."1.20"]
+minecraft_version = "1.20.1"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.112"]
+source = { host = "Modrinth", version = "ccoVD5qw" }
+
+[[mods]]
+name = "Weird Addons"
+slug = "carpet-weird-addons"
+repo = "fxmorin/WeirdAddons"
+entrypoint = "weirdaddons.WeirdAddonsServer"
+settings_classes = ["weirdaddons.WeirdAddonsSettings"]
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "v1.2.0", asset = "weirdaddons-1.16.5-1.2.0.jar" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "GitHub", tag = "v1.4.0", asset = "weirdaddons-1.17-1.4.0.jar" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:M2G5yWMw"]
+source = { host = "GitHub", tag = "v1.5.0", asset = "weirdaddons-1.18-1.5.0.jar" }
+
+[[mods]]
+name = "Johan Carpet Addon"
+slug = "johan-carpet"
+repo = "JohanVonElectrum/Johan-Carpet"
+# we must make sure the static code in that class is loaded, as it calls `onGameStarted` itself
+entrypoint = "com.johanvonelectrum.johan_carpet.JohanExtension::noop"
+settings_classes = ["com.johanvonelectrum.johan_carpet.JohanSettings"]
+run_client = false
+
+[mods.versions."1.16"]
+minecraft_version = "1.16.5"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.44"]
+source = { host = "GitHub", tag = "2021.12.18", asset = "johan-carpet-1.16.4-2021.12.18.jar" }
+
+[mods.versions."1.17"]
+minecraft_version = "1.17.1"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.57"]
+source = { host = "GitHub", tag = "2021.12.18", asset = "johan-carpet-1.17.1-2021.12.18.jar" }
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "GitHub", tag = "2022.7.5", asset = "johan-carpet-1.18.2-2022.7.5.jar" }
+
+[[mods]]
+name = "Flying Carpet"
+slug = "carpet-flying"
+entrypoint = "pl.kosma.carpetflying.CarpetFlyingExtension"
+settings_manager = "pl.kosma.carpetflying.CarpetFlyingExtension.settingsManager"
+settings_classes = ["pl.kosma.carpetflying.CarpetFlyingSettings"]
+
+[mods.versions."1.19"]
+minecraft_version = "1.19.4"
+printer_version = "v3"
+dependencies = ["maven.modrinth:carpet:1.4.101"]
+source = { host = "Modrinth", version = "wJ13M7gH" }
+
+[[mods]]
+name = "Ceramic"
+slug = "ceramic"
+repo = "adryd325/ceramic"
+entrypoint = "com.adryd.ceramic.Ceramic"
+settings_manager = "com.adryd.ceramic.Ceramic.ceramicSettingsManager"
+settings_classes = ["com.adryd.ceramic.CeramicSettings"]
+
+[mods.versions."1.18"]
+minecraft_version = "1.18.2"
+printer_version = "v1"
+dependencies = ["maven.modrinth:carpet:1.4.69"]
+source = { host = "GitHub", tag = "0.1.0", asset = "ceramic-1.18-0.1.0.jar" }
