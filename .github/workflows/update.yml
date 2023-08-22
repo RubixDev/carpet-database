@@ -87,7 +87,7 @@ jobs:
 
       - name: Combine Data
         run: |
-          rm -r data
+          rm -rf data
           mkdir data
           cp artifacts/*/* data/
           cargo run combine
