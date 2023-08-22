@@ -1,0 +1,39 @@
+**Rules parsed**: 1355
+
+- **Carpet-Fixes**: 308
+- **Carpet**: 104
+- **Rug**: 104
+- **Carpet TIS Addition**: 98
+- **Carpet RedCraft Addons**: 85
+- **EssentialAddons**: 64
+- **Carpet Extra**: 57
+- **Minitweaks**: 46
+- **Carpet Gamerules**: 45
+- **Weird Addons**: 43
+- **XpBeacons**: 43
+- **Johan Carpet Addon**: 41
+- **Carpet Sky Additions**: 38
+- **Ivan Carpet Addition**: 34
+- **Carpet TCTC Addition**: 30
+- **Plusls Carpet Addition**: 30
+- **Epsilon Carpet**: 25
+- **Anvil Crush**: 16
+- **Carpet DRC Addition**: 16
+- **Carpet Lunaar Addons**: 16
+- **Ceramic**: 13
+- **Hosting-luisch Carpet**: 12
+- **Carpet Shadow**: 10
+- **Carpet Addons**: 9
+- **LiteTech Additions**: 8
+- **SubTick**: 8
+- **SubTick (chiraagChakravarthy)**: 8
+- **Jank Addons**: 7
+- **Toto's Carpet Tweaks**: 7
+- **Bastion Carpet**: 6
+- **Intricarpet**: 6
+- **Chronos Carpet Addons**: 5
+- **Flying Carpet**: 5
+- **Fractal Carpet Addon**: 3
+- **MoistCraft Carpet Addons**: 2
+- **Swaggy Carpet Addon**: 2
+- **Carpet AutoCraftingTable**: 1

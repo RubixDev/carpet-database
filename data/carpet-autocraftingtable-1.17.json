@@ -1,0 +1,1 @@
+{"hash":3051381389287043274,"rules":[{"name":"autoCraftingTable","description":"Auto-crafting table","type":"boolean","value":"false","strict":true,"categories":["CREATIVE","EXTRAS"],"options":["true","false"],"extras":[],"validators":[],"config_files":["carpet"]}]}
