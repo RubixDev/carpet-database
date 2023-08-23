@@ -1,5 +1,7 @@
 # Carpet Rules Database
 
+![Logo](assets/logo.png)
+
 A database of carpet rules provided by
 [Carpet Mod](https://github.com/gnembon/fabric-carpet) and many of its
 [extensions](https://github.com/gnembon/fabric-carpet/wiki/List-of-Carpet-extensions).
