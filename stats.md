@@ -1,4 +1,4 @@
-**Rules parsed**: 1528
+**Rules parsed**: 1529
 
 Count per mod:
 
@@ -22,7 +22,7 @@ Count per mod:
 - **Plusls Carpet Addition**: 30
 - **Player Extend Carpet Addition**: 26
 - **Epsilon Carpet**: 25
-- **Opt-Carpet-Addition**: 24
+- **Opt-Carpet-Addition**: 25
 - **Anvil Crush**: 16
 - **Carpet DRC Addition**: 16
 - **Carpet Lunaar Addons**: 16
@@ -50,17 +50,17 @@ Count per mod:
 
 Count per version:
 
-- **1.18**: 1222
-- **1.19**: 1148
-- **1.17**: 1007
-- **1.20**: 986
+- **1.18**: 1223
+- **1.19**: 1149
+- **1.17**: 1008
+- **1.20**: 987
 - **1.16**: 803
-- **1.15**: 320
-- **1.14**: 293
+- **1.15**: 351
+- **1.14**: 317
 
 Count per category:
 
-- `FEATURE`: 462
+- `FEATURE`: 463
 - `SURVIVAL`: 375
 - `BUGFIX`: 297
 - `EXPERIMENTAL`: 233
