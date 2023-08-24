@@ -126,7 +126,7 @@ pub enum PrinterVersion {
 
 macro_rules! mc_version_enum {
     ($name:ident; $($variant:ident = $str:literal),+ $(,)?) => {
-        #[derive(Debug, Clone, Copy, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, strum::Display)]
+        #[derive(Debug, Clone, Copy, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, strum::Display, strum::AsRefStr)]
         pub enum $name {$(
             #[serde(rename = $str)]
             #[strum(serialize = $str)]
@@ -198,6 +198,45 @@ impl From<MinecraftVersion> for MinecraftMajorVersion {
             MinecraftVersion::V1_19_4 => MinecraftMajorVersion::V1_19,
             MinecraftVersion::V1_20 => MinecraftMajorVersion::V1_20,
             MinecraftVersion::V1_20_1 => MinecraftMajorVersion::V1_20,
+        }
+    }
+}
+
+#[cfg(feature = "update")]
+impl MinecraftMajorVersion {
+    pub fn minors(&self) -> &'static [MinecraftVersion] {
+        match self {
+            MinecraftMajorVersion::V1_14 => &[MinecraftVersion::V1_14_4],
+            MinecraftMajorVersion::V1_15 => &[
+                MinecraftVersion::V1_15,
+                MinecraftVersion::V1_15_1,
+                MinecraftVersion::V1_15_2,
+            ],
+            MinecraftMajorVersion::V1_16 => &[
+                // MinecraftVersion::V1_16,
+                // MinecraftVersion::V1_16_1,
+                MinecraftVersion::V1_16_2,
+                MinecraftVersion::V1_16_3,
+                MinecraftVersion::V1_16_4,
+                MinecraftVersion::V1_16_5,
+            ],
+            MinecraftMajorVersion::V1_17 => &[
+                // MinecraftVersion::V1_17,
+                MinecraftVersion::V1_17_1,
+            ],
+            MinecraftMajorVersion::V1_18 => &[
+                // MinecraftVersion::V1_18,
+                MinecraftVersion::V1_18_1,
+                MinecraftVersion::V1_18_2,
+            ],
+            MinecraftMajorVersion::V1_19 => &[
+                MinecraftVersion::V1_19,
+                MinecraftVersion::V1_19_1,
+                MinecraftVersion::V1_19_2,
+                MinecraftVersion::V1_19_3,
+                MinecraftVersion::V1_19_4,
+            ],
+            MinecraftMajorVersion::V1_20 => &[MinecraftVersion::V1_20, MinecraftVersion::V1_20_1],
         }
     }
 }

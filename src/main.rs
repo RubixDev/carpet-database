@@ -27,6 +27,8 @@ use xshell::{cmd, Shell};
 use crate::schema::{RawRule, RulesJson};
 
 mod schema;
+#[cfg(feature = "update")]
+mod update;
 
 const TERMINAL_CHILD_STDOUT_LINE_COUNT: usize = 15;
 
@@ -66,6 +68,12 @@ async fn try_main() -> Result<()> {
     let arg = arg.as_ref();
 
     let ModsToml { mods } = toml::from_str(include_str!("../mods.toml"))?;
+
+    #[cfg(feature = "update")]
+    if arg.map_or(false, |s| s == "update") {
+        update::search_updates(&mods).await?;
+        return Ok(());
+    }
 
     if arg.map_or(false, |s| s == "get-matrix") {
         let entries = mods
