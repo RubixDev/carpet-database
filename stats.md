@@ -1,11 +1,11 @@
-**Rules parsed**: 1676
+**Rules parsed**: 1677
 
 Count per mod:
 
 - **Carpet-Fixes**: 308
 - **Carpet**: 105
+- **Rug**: 105
 - **Carpet TIS Addition**: 104
-- **Rug**: 104
 - **Carpet RedCraft Addons**: 85
 - **Carpet Org Addition**: 72
 - **Carpet AMS Addition**: 66
@@ -55,7 +55,7 @@ Count per version:
 
 - **1.18**: 1236
 - **1.19**: 1161
-- **1.20**: 1133
+- **1.20**: 1134
 - **1.17**: 1027
 - **1.16**: 814
 - **1.15**: 353
@@ -70,7 +70,7 @@ Count per category:
 - `CREATIVE`: 221
 - `COMMAND`: 137
 - `CARPET-FIXES`: 108
-- `RUG`: 104
+- `RUG`: 105
 - `TIS`: 102
 - `REDCRAFT`: 81
 - `CRAFTING`: 74
