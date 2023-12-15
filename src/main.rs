@@ -1,6 +1,7 @@
 use std::{
     collections::{hash_map::DefaultHasher, BTreeMap, BTreeSet, HashSet},
     env,
+    fmt::Write as FmtWrite,
     fs::{self, File},
     hash::{Hash, Hasher},
     io::{IsTerminal, Write},
@@ -11,6 +12,7 @@ use std::{
 use anyhow::{bail, Context, Result};
 use fs_extra::dir::CopyOptions;
 use itertools::Itertools;
+use lazy_regex::regex_replace;
 use once_cell::sync::Lazy;
 use reqwest::Client;
 use schema::{
@@ -215,6 +217,7 @@ async fn run_mod(
         settings_manager_class: default_settings_manager_class,
         rule_annotation_class: default_rule_annotation_class,
         settings_classes: default_settings_classes,
+        loader_version: default_loader_version,
         run_client: default_run_client,
         common_dependencies,
         versions,
@@ -249,6 +252,7 @@ async fn run_mod(
             settings_manager_class,
             rule_annotation_class,
             settings_classes,
+            loader_version,
             run_client,
             dependencies,
             source,
@@ -292,6 +296,10 @@ async fn run_mod(
             .as_ref()
             .or(default_settings_classes.as_ref())
             .with_context(|| "no settings classes specified")?;
+        let loader_version = loader_version
+            .as_ref()
+            .or(default_loader_version.as_ref())
+            .filter(|s| !s.is_empty());
         let run_client = run_client.unwrap_or(*default_run_client);
         let dependencies = common_dependencies.iter().chain(dependencies).collect_vec();
 
@@ -320,6 +328,7 @@ async fn run_mod(
             settings_manager_class,
             rule_annotation_class,
             settings_classes,
+            loader_version,
             run_client,
             &dependencies,
             source,
@@ -480,10 +489,10 @@ public interface PrivateSettingsManagerAccessor {{
             VersionSource::GitHub { tag, asset } => get_github_dep(sh, repo, tag, asset).await?,
         };
         modify_file(ACTIVE_DIR.join("build.gradle"), |str| {
-            let extra_deps = dependencies
-                .iter()
-                .map(|dep| format!("\n    modImplementation '{dep}'"))
-                .collect::<String>();
+            let extra_deps = dependencies.iter().fold(String::new(), |mut out, dep| {
+                let _ = write!(out, "\n    modImplementation '{dep}'");
+                out
+            });
             Ok(str
                 + &format!(
                     r###"
@@ -508,6 +517,8 @@ repositories {{
             includeGroup "curse.maven"
         }}
     }}
+    // Fallen-Breath's stuff
+    maven {{ url "https://maven.fallenbreath.me/releases" }}
 }}
 
 dependencies {{
@@ -516,6 +527,19 @@ dependencies {{
 "###,
                 ))
         })?;
+
+        // overriding loader version
+        if let Some(version) = loader_version {
+            println!("\x1b[36m>> overriding loader version\x1b[0m");
+            modify_file(ACTIVE_DIR.join("gradle.properties"), |str| {
+                Ok(
+                    regex_replace!(r"(loader_version\s*=\s*).*", &str, |_, pre| format!(
+                        "{pre}{version}"
+                    ))
+                    .into_owned(),
+                )
+            })?;
+        }
 
         // run
         println!("\x1b[36m>> running extraction\x1b[0m");

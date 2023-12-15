@@ -69,6 +69,8 @@ pub struct Mod {
     pub settings_manager_class: Option<String>,
     pub rule_annotation_class: Option<String>,
     pub settings_classes: Option<Vec<String>>,
+    // optional manual override of the Fabric loader version
+    pub loader_version: Option<String>,
     #[serde(default)]
     pub run_client: bool,
     // dependencies that are common across all versions
@@ -86,6 +88,7 @@ pub struct ModVersion {
     pub settings_manager_class: Option<String>,
     pub rule_annotation_class: Option<String>,
     pub settings_classes: Option<Vec<String>>,
+    pub loader_version: Option<String>,
     pub run_client: Option<bool>,
     /// dependencies other than Fabric API
     #[serde(default)]
@@ -171,6 +174,9 @@ mc_version_enum! {
     V1_19_4 = "1.19.4",
     V1_20 = "1.20",
     V1_20_1 = "1.20.1",
+    V1_20_2 = "1.20.2",
+    V1_20_3 = "1.20.3",
+    V1_20_4 = "1.20.4",
 }
 
 impl From<MinecraftVersion> for MinecraftMajorVersion {
@@ -198,6 +204,9 @@ impl From<MinecraftVersion> for MinecraftMajorVersion {
             MinecraftVersion::V1_19_4 => MinecraftMajorVersion::V1_19,
             MinecraftVersion::V1_20 => MinecraftMajorVersion::V1_20,
             MinecraftVersion::V1_20_1 => MinecraftMajorVersion::V1_20,
+            MinecraftVersion::V1_20_2 => MinecraftMajorVersion::V1_20,
+            MinecraftVersion::V1_20_3 => MinecraftMajorVersion::V1_20,
+            MinecraftVersion::V1_20_4 => MinecraftMajorVersion::V1_20,
         }
     }
 }
@@ -236,7 +245,13 @@ impl MinecraftMajorVersion {
                 MinecraftVersion::V1_19_3,
                 MinecraftVersion::V1_19_4,
             ],
-            MinecraftMajorVersion::V1_20 => &[MinecraftVersion::V1_20, MinecraftVersion::V1_20_1],
+            MinecraftMajorVersion::V1_20 => &[
+                MinecraftVersion::V1_20,
+                MinecraftVersion::V1_20_1,
+                MinecraftVersion::V1_20_2,
+                MinecraftVersion::V1_20_3,
+                MinecraftVersion::V1_20_4,
+            ],
         }
     }
 }

@@ -1,17 +1,19 @@
-**Rules parsed**: 1529
+**Rules parsed**: 1676
 
 Count per mod:
 
 - **Carpet-Fixes**: 308
-- **Carpet**: 104
+- **Carpet**: 105
+- **Carpet TIS Addition**: 104
 - **Rug**: 104
-- **Carpet TIS Addition**: 98
 - **Carpet RedCraft Addons**: 85
+- **Carpet Org Addition**: 72
+- **Carpet AMS Addition**: 66
 - **EssentialAddons**: 64
-- **Carpet AMS Addition**: 63
-- **Carpet Extra**: 57
+- **Carpet Extra**: 58
+- **Doormat**: 53
+- **Carpet Gamerules**: 50
 - **Minitweaks**: 46
-- **Carpet Gamerules**: 45
 - **Weird Addons**: 43
 - **XpBeacons**: 43
 - **Johan Carpet Addon**: 41
@@ -39,6 +41,7 @@ Count per mod:
 - **Toto's Carpet Tweaks**: 7
 - **Bastion Carpet**: 6
 - **Intricarpet**: 6
+- **Rober Carpet**: 6
 - **Chronos Carpet Addons**: 5
 - **Flying Carpet**: 5
 - **Carpet MCT Addition**: 3
@@ -50,44 +53,46 @@ Count per mod:
 
 Count per version:
 
-- **1.18**: 1223
-- **1.19**: 1149
-- **1.17**: 1008
-- **1.20**: 987
-- **1.16**: 803
-- **1.15**: 351
-- **1.14**: 317
+- **1.18**: 1236
+- **1.19**: 1161
+- **1.20**: 1133
+- **1.17**: 1027
+- **1.16**: 814
+- **1.15**: 353
+- **1.14**: 319
 
 Count per category:
 
-- `FEATURE`: 463
-- `SURVIVAL`: 375
-- `BUGFIX`: 297
-- `EXPERIMENTAL`: 233
-- `CREATIVE`: 215
-- `COMMAND`: 115
+- `FEATURE`: 550
+- `SURVIVAL`: 405
+- `BUGFIX`: 298
+- `EXPERIMENTAL`: 237
+- `CREATIVE`: 221
+- `COMMAND`: 137
 - `CARPET-FIXES`: 108
 - `RUG`: 104
-- `TIS`: 96
+- `TIS`: 102
 - `REDCRAFT`: 81
 - `CRAFTING`: 74
+- `ORG`: 72
+- `AMS`: 66
 - `ESSENTIAL`: 64
-- `AMS`: 63
-- `EXTRAS`: 59
+- `EXTRAS`: 60
+- `DOORMAT`: 53
+- `GAMERULE`: 50
 - `MINITWEAKS`: 46
-- `GAMERULE`: 45
 - `RECOMMENDED`: 44
 - `WEIRD`: 43
 - `XPBEACONS`: 43
 - `JOHAN-ADDON`: 41
 - `OPTIMIZATION`: 39
-- `DISPENSER`: 36
+- `DISPENSER`: 37
 - `MOBS`: 35
 - `ICA`: 34
 - `CARPET-ADDONS-NOT-FOUND`: 30
 - `DATAPACK`: 30
 - `PCA`: 30
-- `CLIENT`: 28
+- `CLIENT`: 29
 - `PECA`: 26
 - `EPSILON-CARPET`: 24
 - `TCTC`: 23
@@ -100,15 +105,17 @@ Count per category:
 - `LUNAAR`: 16
 - `MA_124`: 16
 - `SUBTICK`: 16
+- `PLAYER`: 15
 - `REINTRODUCE`: 15
-- `TNT`: 15
-- `AMS_MOVABLE`: 13
 - `RENEWABLE`: 13
 - `CARPETPLUSPLUS`: 12
 - `GCA`: 12
-- `PLAYER`: 12
+- `TNT`: 12
 - `ADVANCED`: 11
+- `CARPET_MOD`: 11
+- `UPDATE`: 11
 - `HOSTINGLUISCH`: 10
+- `PARITY`: 10
 - `SHADOW_ITEMS`: 10
 - `CARPETADDONS`: 9
 - `HOSTING-LUISCH`: 9
@@ -117,14 +124,16 @@ Count per category:
 - `CRASHFIX`: 8
 - `ENCHANTMENT`: 8
 - `LITETECH`: 8
+- `QC`: 8
 - `WORLD_UPDATES`: 8
-- `CARPET_MOD`: 7
+- `DROPS`: 7
 - `INTENDED`: 7
 - `JANK`: 7
 - `MISC`: 7
 - `TOTOS-TWEAKS`: 7
+- `AMS_CHUNKLOADER`: 6
 - `BASTION-CARPET`: 6
-- `DROPS`: 6
+- `ROBER`: 6
 - `SCARPET`: 6
 - `CHAT`: 5
 - `CHRONOS`: 5
@@ -132,21 +141,20 @@ Count per category:
 - `HASTE`: 5
 - `INTRICATE`: 5
 - `JUMP_BOOST`: 5
+- `MISCELLANEOUS`: 5
 - `REGENERATION`: 5
 - `RESISTANCE`: 5
 - `SPAWNING`: 5
 - `SPEED`: 5
 - `STRENGTH`: 5
 - `TCTC-COMMAND`: 5
-- `AMS_CHUNKLOADER`: 4
 - `ANVIL`: 4
 - `EPSILON-CARPET-END-FEATURES`: 4
 - `EPSILON-CARPET-ENTITY-FEATURES`: 4
 - `GAMEMECHANICS`: 4
 - `GENERAL BEACON SETTINGS`: 4
+- `GENERAL_BEACON_SETTINGS`: 4
 - `JOHAN-END-FEATURES`: 4
-- `MISCELLANEOUS`: 4
-- `PARITY`: 4
 - `TCTC-EXPERIMENTAL`: 4
 - `TCTC-MISC`: 4
 - `WANDERING_TRADER`: 4
@@ -157,6 +165,7 @@ Count per category:
 - `DEBUG`: 3
 - `EPSILON-CARPET-PLAYER-TWEAKS`: 3
 - `FABRICATIONPORT`: 3
+- `FALLING-BLOCK`: 3
 - `FRACTALADDON`: 3
 - `FRACTALENDFEATURES`: 3
 - `JOACARPET`: 3
@@ -165,6 +174,7 @@ Count per category:
 - `TCTC-BUGFIX`: 3
 - `TCTC-PROTOCOL`: 3
 - `TISADDITIONSPORT`: 3
+- `TISCM_PROTOCOL`: 3
 - `EPSILON-CARPET-CANNON-FEATURES`: 2
 - `EPSILON-CARPET-SCOREBOARD-FEATURES`: 2
 - `MOISTCRAFT`: 2
@@ -173,7 +183,6 @@ Count per category:
 - `SPECTATOR`: 2
 - `SWAGGY`: 2
 - `TCTC-CLIENT`: 2
-- `TISCM_PROTOCOL`: 2
 - `WONTFIX`: 2
 - `1.17`: 1
 - `COPRAHACKS`: 1

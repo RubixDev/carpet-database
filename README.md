@@ -160,7 +160,7 @@ source = { host = "Modrinth", version = "" }
 [mods.versions."1.20"]
 # The exact Minecraft to use. This should be the latest for this major MC
 # version that the mod supports.
-minecraft_version = "1.20.1"
+minecraft_version = "1.20.4"
 # The printer version. Available printers are `v1`, `v2`, `v3`,
 # `magiclib-v1`, and `magiclib-v2.
 # Usually, `v1` is used for pre-1.19 mods and `v3` for >=1.19.
@@ -204,7 +204,7 @@ run_client = false
 # This always includes the appropriate Carpet version.
 # To add mods from Modrinth use `maven.modrinth:<slug>:<version>`.
 # To add mods from CurseForge use `curse.maven:<slug>-<project_id>:<file_id>`.
-dependencies = ["maven.modrinth:carpet:1.4.112"]
+dependencies = ["maven.modrinth:carpet:1.4.128"]
 # Where to download the mod from.
 # Either Modrinth, CurseForge, or GitHub.
 # Modrinth sources can optionally define `filename` to specify a non-primary
