@@ -1,17 +1,17 @@
-**Rules parsed**: 1678
+**Rules parsed**: 1740
 
 Count per mod:
 
 - **Carpet-Fixes**: 308
+- **Carpet TIS Addition**: 118
 - **Rug**: 106
 - **Carpet**: 105
-- **Carpet TIS Addition**: 104
+- **Carpet AMS Addition**: 91
 - **Carpet RedCraft Addons**: 85
-- **Carpet Org Addition**: 72
-- **Carpet AMS Addition**: 66
+- **Carpet Org Addition**: 83
 - **EssentialAddons**: 64
+- **Doormat**: 62
 - **Carpet Extra**: 58
-- **Doormat**: 53
 - **Carpet Gamerules**: 50
 - **Minitweaks**: 46
 - **Weird Addons**: 43
@@ -22,9 +22,9 @@ Count per mod:
 - **Carpet Addons Not Found**: 30
 - **Carpet TCTC Addition**: 30
 - **Plusls Carpet Addition**: 30
+- **Opt-Carpet-Addition**: 27
 - **Player Extend Carpet Addition**: 26
 - **Epsilon Carpet**: 25
-- **Opt-Carpet-Addition**: 25
 - **Anvil Crush**: 16
 - **Carpet DRC Addition**: 16
 - **Carpet Lunaar Addons**: 16
@@ -35,64 +35,64 @@ Count per mod:
 - **Carpet Shadow**: 10
 - **Carpet Addons**: 9
 - **LiteTech Additions**: 8
-- **SubTick**: 8
 - **SubTick (chiraagChakravarthy)**: 8
 - **Jank Addons**: 7
+- **SubTick**: 7
 - **Toto's Carpet Tweaks**: 7
 - **Bastion Carpet**: 6
 - **Intricarpet**: 6
 - **Rober Carpet**: 6
 - **Chronos Carpet Addons**: 5
 - **Flying Carpet**: 5
+- **JoaCarpet**: 5
 - **Carpet MCT Addition**: 3
 - **Fractal Carpet Addon**: 3
-- **JoaCarpet**: 3
 - **MoistCraft Carpet Addons**: 2
 - **Swaggy Carpet Addon**: 2
 - **Carpet AutoCraftingTable**: 1
 
 Count per version:
 
-- **1.18**: 1236
-- **1.19**: 1161
-- **1.20**: 1135
-- **1.17**: 1027
-- **1.16**: 814
-- **1.15**: 353
-- **1.14**: 319
+- **1.18**: 1268
+- **1.19**: 1196
+- **1.20**: 1183
+- **1.17**: 1059
+- **1.16**: 847
+- **1.15**: 361
+- **1.14**: 327
 
 Count per category:
 
-- `FEATURE`: 550
-- `SURVIVAL`: 405
-- `BUGFIX`: 298
-- `EXPERIMENTAL`: 237
-- `CREATIVE`: 221
-- `COMMAND`: 137
+- `FEATURE`: 545
+- `SURVIVAL`: 432
+- `BUGFIX`: 299
+- `EXPERIMENTAL`: 240
+- `CREATIVE`: 228
+- `COMMAND`: 152
+- `TIS`: 116
 - `CARPET-FIXES`: 108
 - `RUG`: 106
-- `TIS`: 102
+- `AMS`: 91
+- `ORG`: 83
 - `REDCRAFT`: 81
 - `CRAFTING`: 74
-- `ORG`: 72
-- `AMS`: 66
 - `ESSENTIAL`: 64
+- `DOORMAT`: 62
 - `EXTRAS`: 60
-- `DOORMAT`: 53
 - `GAMERULE`: 50
 - `MINITWEAKS`: 46
 - `RECOMMENDED`: 44
 - `WEIRD`: 43
 - `XPBEACONS`: 43
 - `JOHAN-ADDON`: 41
-- `OPTIMIZATION`: 39
+- `OPTIMIZATION`: 40
 - `DISPENSER`: 37
+- `CLIENT`: 36
 - `MOBS`: 35
 - `ICA`: 34
 - `CARPET-ADDONS-NOT-FOUND`: 30
 - `DATAPACK`: 30
 - `PCA`: 30
-- `CLIENT`: 29
 - `PECA`: 26
 - `EPSILON-CARPET`: 24
 - `TCTC`: 23
@@ -104,34 +104,34 @@ Count per category:
 - `DRC`: 16
 - `LUNAAR`: 16
 - `MA_124`: 16
-- `SUBTICK`: 16
 - `PLAYER`: 15
 - `REINTRODUCE`: 15
+- `SUBTICK`: 15
+- `CARPET_MOD`: 14
 - `RENEWABLE`: 13
+- `TINKERING`: 13
 - `CARPETPLUSPLUS`: 12
 - `GCA`: 12
+- `PARITY`: 12
 - `TNT`: 12
 - `ADVANCED`: 11
-- `CARPET_MOD`: 11
-- `UPDATE`: 11
 - `HOSTINGLUISCH`: 10
-- `PARITY`: 10
+- `PORTING`: 10
 - `SHADOW_ITEMS`: 10
 - `CARPETADDONS`: 9
 - `HOSTING-LUISCH`: 9
 - `PROTOCOL`: 9
 - `TCTC-FEATURE`: 9
+- `AMS_CHUNKLOADER`: 8
 - `CRASHFIX`: 8
 - `ENCHANTMENT`: 8
 - `LITETECH`: 8
-- `QC`: 8
 - `WORLD_UPDATES`: 8
 - `DROPS`: 7
 - `INTENDED`: 7
 - `JANK`: 7
 - `MISC`: 7
 - `TOTOS-TWEAKS`: 7
-- `AMS_CHUNKLOADER`: 6
 - `BASTION-CARPET`: 6
 - `ROBER`: 6
 - `SCARPET`: 6
@@ -140,6 +140,7 @@ Count per category:
 - `GENERATION`: 5
 - `HASTE`: 5
 - `INTRICATE`: 5
+- `JOACARPET`: 5
 - `JUMP_BOOST`: 5
 - `MISCELLANEOUS`: 5
 - `REGENERATION`: 5
@@ -157,8 +158,10 @@ Count per category:
 - `JOHAN-END-FEATURES`: 4
 - `TCTC-EXPERIMENTAL`: 4
 - `TCTC-MISC`: 4
+- `TOOLTIP`: 4
 - `WANDERING_TRADER`: 4
 - `ADMINISTRATION`: 3
+- `APRIL_FOOLS`: 3
 - `CMA`: 3
 - `COMBAT`: 3
 - `DAMAGE`: 3
@@ -168,7 +171,6 @@ Count per category:
 - `FALLING-BLOCK`: 3
 - `FRACTALADDON`: 3
 - `FRACTALENDFEATURES`: 3
-- `JOACARPET`: 3
 - `MODDED`: 3
 - `NEED_CLIENT`: 3
 - `TCTC-BUGFIX`: 3
@@ -179,7 +181,6 @@ Count per category:
 - `EPSILON-CARPET-SCOREBOARD-FEATURES`: 2
 - `MOISTCRAFT`: 2
 - `NBT`: 2
-- `PORTING`: 2
 - `SPECTATOR`: 2
 - `SWAGGY`: 2
 - `TCTC-CLIENT`: 2
@@ -188,5 +189,6 @@ Count per category:
 - `COPRAHACKS`: 1
 - `INTRICARPET`: 1
 - `LOGGER`: 1
+- `RETRO`: 1
 - `TCTC-WORLD_GENERATE`: 1
 - `WORLD_GENERATE`: 1
