@@ -803,6 +803,9 @@ fn combine(sh: &Shell, outputs: Vec<Output>) -> Result<()> {
         println!("\x1b[32m> {mod_name}: {count}\x1b[0m");
         stats_md += &format!("- **{mod_name}**: {count}\n");
     }
+    if let Ok(path) = env::var("GITHUB_OUTPUT") {
+        sh.write_file(path, format!("stats<<EOF\n{stats_md}EOF"))?;
+    }
     println!("\x1b[32m>> Count per version:\x1b[0m");
     stats_md += "\nCount per version:\n\n";
     for (version, count) in &count_by_version {

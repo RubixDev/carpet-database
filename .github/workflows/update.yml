@@ -11,7 +11,7 @@ jobs:
       mod-list: ${{ steps.get-matrix.outputs.mod-list }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -33,10 +33,10 @@ jobs:
       matrix: ${{ fromJson(needs.get-matrix.outputs.mod-list) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -59,7 +59,7 @@ jobs:
           cargo run mod:${{ matrix.slug }}
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: data-${{ matrix.slug }}
           path: data/${{ matrix.slug }}-1.*.json
@@ -70,7 +70,7 @@ jobs:
     needs: run-mods
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -81,11 +81,12 @@ jobs:
           cache-on-failure: true
 
       - name: Download data
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
 
       - name: Combine Data
+        id: combine
         run: |
           rm -rf data
           mkdir data
@@ -94,9 +95,12 @@ jobs:
 
       - name: Capture date
         id: capture-date
-        run: echo "date=$(date -u)" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "date=$(date -u)" >> "$GITHUB_OUTPUT"
+          echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%S%z)" >> "$GITHUB_OUTPUT"
 
       - name: Commit changes
+        id: commit
         uses: EndBug/add-and-commit@v9
         with:
           add: data stats.md
@@ -104,3 +108,17 @@ jobs:
           committer_email: 41898282+github-actions[bot]@users.noreply.github.com
           message: "Update database '${{ steps.capture-date.outputs.date }}'"
           pull: '--rebase --autostash'
+
+      - name: Send Discord Notification
+        uses: tsickert/discord-webhook@v5.4.0
+        if: steps.commit.outputs.committed == 'true'
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          embed-title: 'Carpet Rules Database Updated'
+          embed-description: ${{ steps.combine.outputs.stats }}
+          embed-color: 13538264
+          embed-timestamp: ${{ steps.capture-date.outputs.timestamp }}
+          embed-url: ${{ github.server_url }}/${{ github.repository }}/blob/${{ steps.commit.outputs.commit_long_sha }}/stats.md
+          embed-author-name: Carpet Database
+          embed-author-url: https://carpet.rubixdev.de
+          embed-author-icon-url: https://raw.githubusercontent.com/RubixDev/carpet-database/3f3bec59fa4e1e7709348fb3cb5f1c6120f6ac3b/assets/logo.png
